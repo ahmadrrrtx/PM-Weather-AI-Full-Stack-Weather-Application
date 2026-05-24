@@ -14,7 +14,7 @@ import {
   FileJson,
   FileText,
   BookOpen,
-  FilePdf,
+  FileDown,
   RefreshCw,
   Eye,
   EyeOff,
@@ -27,7 +27,7 @@ import {
   exportPDF,
 } from "@/lib/export";
 import type { WeatherRecord } from "@/lib/types";
-import { decodeWeatherCode, formatDate } from "@/lib/weather";
+import { decodeWeatherCode } from "@/lib/weather";
 import { formatDateRange, cn } from "@/lib/utils";
 import RecordForm from "./RecordForm";
 
@@ -121,7 +121,7 @@ export default function SavedRecords({ onRecordClick, refreshKey }: Props) {
                 },
                 {
                   key: "pdf" as const,
-                  icon: <FilePdf className="w-3.5 h-3.5" />,
+                  icon: <FileDown className="w-3.5 h-3.5" />,
                   label: "PDF",
                 },
               ].map((exp) => (
@@ -189,9 +189,12 @@ export default function SavedRecords({ onRecordClick, refreshKey }: Props) {
             {records.length === 0 ? (
               <div className="glass rounded-xl p-8 text-center">
                 <p className="text-4xl mb-3">📋</p>
-                <p className="text-white/60 font-medium">No saved records yet</p>
+                <p className="text-white/60 font-medium">
+                  No saved records yet
+                </p>
                 <p className="text-white/30 text-sm mt-1">
-                  Search for a location and click "Save Record" to start tracking
+                  Search for a location and click &quot;Save Record&quot; to
+                  start tracking
                 </p>
               </div>
             ) : (
@@ -283,9 +286,7 @@ export default function SavedRecords({ onRecordClick, refreshKey }: Props) {
                               <button
                                 onClick={() =>
                                   setEditingId(
-                                    editingId === record.id
-                                      ? null
-                                      : record.id
+                                    editingId === record.id ? null : record.id
                                   )
                                 }
                                 className="w-7 h-7 rounded-lg hover:bg-amber-500/20 flex items-center justify-center text-white/40 hover:text-amber-300 transition-all"
