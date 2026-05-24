@@ -4,7 +4,6 @@ const nextConfig = {
   images: {
     domains: [],
   },
-  // Suppress Leaflet SSR warnings
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
