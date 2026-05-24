@@ -40,12 +40,14 @@ export async function POST(request: NextRequest) {
         "Notes",
         "Created At",
       ];
+
       const escape = (v: unknown) => {
         const s = v === null || v === undefined ? "" : String(v);
         return s.includes(",") || s.includes('"')
           ? `"${s.replace(/"/g, '""')}"`
           : s;
       };
+
       const rows = records.map((r) => {
         const cw = r.weatherJson?.current;
         return [
@@ -64,7 +66,9 @@ export async function POST(request: NextRequest) {
           .map(escape)
           .join(",");
       });
+
       const csv = [headers.map(escape).join(","), ...rows].join("\n");
+
       return new NextResponse(csv, {
         headers: {
           "Content-Type": "text/csv",
