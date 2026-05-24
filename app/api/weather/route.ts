@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { geocodeLocation } from "@/lib/geocode";
 import { fetchWeatherData } from "@/lib/weather";
 
-export const runtime = "edge";
-
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const location = searchParams.get("location");
@@ -16,7 +14,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Geocode the location
     const geoResult = await geocodeLocation(location.trim());
 
     if (!geoResult) {
@@ -28,7 +25,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Fetch weather data
     const weatherData = await fetchWeatherData(geoResult);
 
     return NextResponse.json(weatherData, {
