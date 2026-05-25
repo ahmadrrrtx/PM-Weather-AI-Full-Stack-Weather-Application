@@ -16,7 +16,7 @@
 
 ### ✅ Tech Assessment #1 (Frontend) · ✅ Tech Assessment #2 (Backend) · ✅ Full Stack
 
-[🌐 Live App](https://pm-weather-ai-full-stack-weather-ap-zeta.vercel.app/) · [📁 Repository](https://github.com/ahmadrrrtx/PM-Weather-AI-Full-Stack-Weather-Application) · [🎥 Demo Video](#) · [📋 Submit Form](https://forms.gle/XfM3Xrzpo9sbHr4g8)
+[🌐 Live App](https://pm-weather-ai-full-stack-weather-ap-zeta.vercel.app/) · [📁 Repository](https://github.com/ahmadrrrtx/PM-Weather-AI-Full-Stack-Weather-Application) · [📋 Submit Form](https://forms.gle/XfM3Xrzpo9sbHr4g8)
 
 </div>
 
@@ -40,7 +40,7 @@
 **PM Accelerator** helps aspiring product and AI builders gain practical experience through cohort-based product development, mentorship, and real-world AI product work. This project was built as part of the AI Engineer Internship Technical Assessment, demonstrating full-stack engineering capability across both frontend and backend tracks.
 
 > 📋 [View Assessment Document](https://docs.google.com/document/d/1FjBFbXEySCKolfsNGrTpRja9upf9T7BxOXakLM6Q5f0/edit?tab=t.0)
-> 📬 [Submit via Google Form](https://forms.gle/XfM3Xrzpo9sbHr4g8)
+
 
 ---
 
