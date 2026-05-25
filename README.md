@@ -1,303 +1,298 @@
-# 🌤️ PM Weather AI — Full-Stack Weather Application
+<div align="center">
 
-> **Built by Muhammad Ahmad** for the PM Accelerator AI Engineer Internship Technical Assessment
-> Completing both **Tech Assessment #1 (Frontend)** and **Tech Assessment #2 (Backend/Full-Stack)**
+# 🌤️ PM Weather AI
+### Full-Stack Weather Intelligence Application
 
-![PM Weather AI](https://img.shields.io/badge/PM_Accelerator-AI_Engineer_Assessment-0ea5e9?style=for-the-badge)
-![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Free APIs](https://img.shields.io/badge/APIs-100%25_Free-22c55e?style=for-the-badge)
+**Built by [Muhammad Ahmad](https://ahmad-multi-verse.lovable.app) for PM Accelerator AI Engineer Internship**
+
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_App-0ea5e9?style=for-the-badge)](https://pm-weather-ai-full-stack-weather-ap-zeta.vercel.app/)
+[![Assessment](https://img.shields.io/badge/PM_Accelerator-AI_Engineer_Assessment-6366f1?style=for-the-badge)](https://docs.google.com/document/d/1FjBFbXEySCKolfsNGrTpRja9upf9T7BxOXakLM6Q5f0/edit?tab=t.0)
+[![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Free APIs](https://img.shields.io/badge/APIs-100%25_Free-22c55e?style=for-the-badge)]()
 
 ---
 
-## 🔗 Links
+### ✅ Tech Assessment #1 (Frontend) · ✅ Tech Assessment #2 (Backend) · ✅ Full Stack
 
-| Resource | URL |
+[🌐 Live App](https://pm-weather-ai-full-stack-weather-ap-zeta.vercel.app/) · [📁 Repository](https://github.com/ahmadrrrtx/PM-Weather-AI-Full-Stack-Weather-Application) · [🎥 Demo Video](#) · [📋 Submit Form](https://forms.gle/XfM3Xrzpo9sbHr4g8)
+
+</div>
+
+---
+
+## 👤 About the Builder
+
+| | |
 |---|---|
-| **Live Demo** | _Deploy to Vercel and paste URL here_ |
-| **GitHub** | https://github.com/ahmadrrrtx |
+| **Name** | Muhammad Ahmad |
+| **Role** | Full-Stack AI Engineer |
 | **Portfolio** | https://ahmad-multi-verse.lovable.app |
+| **GitHub** | https://github.com/ahmadrrrtx |
 | **LinkedIn** | https://www.linkedin.com/in/ahmadrrrtx |
-| **Assessment Doc** | https://docs.google.com/document/d/1FjBFbXEySCKolfsNGrTpRja9upf9T7BxOXakLM6Q5f0/edit?tab=t.0 |
-| **Submit Form** | https://forms.gle/XfM3Xrzpo9sbHr4g8 |
+| **Assessment** | PM Accelerator AI Engineer Internship |
 
 ---
 
-## 📋 Table of Contents
+## 🏢 About PM Accelerator
 
-- [Project Overview](#-project-overview)
-- [Assessment Completion](#-assessment-completion)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Folder Structure](#-folder-structure)
-- [Setup & Run Locally](#-setup--run-locally)
-- [Environment Variables](#-environment-variables)
-- [API Reference](#-api-reference)
-- [Database / Storage](#-database--storage)
-- [Export Functionality](#-export-functionality)
-- [Design Decisions](#-design-decisions)
-- [Deploy to Vercel](#-deploy-to-vercel-free)
-- [Deploy to Netlify](#-deploy-to-netlify-alternative)
-- [Demo Video Script](#-demo-video-script)
-- [Submission Checklist](#-submission-checklist)
-- [Future Improvements](#-future-improvements)
-- [About PM Accelerator](#-about-pm-accelerator)
+**PM Accelerator** helps aspiring product and AI builders gain practical experience through cohort-based product development, mentorship, and real-world AI product work. This project was built as part of the AI Engineer Internship Technical Assessment, demonstrating full-stack engineering capability across both frontend and backend tracks.
+
+> 📋 [View Assessment Document](https://docs.google.com/document/d/1FjBFbXEySCKolfsNGrTpRja9upf9T7BxOXakLM6Q5f0/edit?tab=t.0)
+> 📬 [Submit via Google Form](https://forms.gle/XfM3Xrzpo9sbHr4g8)
 
 ---
 
 ## 🌍 Project Overview
 
-**PM Weather AI** is a production-quality, full-stack weather application that provides:
+**PM Weather AI** is a production-quality, full-stack weather application delivering real-time weather intelligence for any location on Earth. Built with a premium glassmorphism UI, animated 3D weather visuals, interactive maps, and a complete CRUD record system — all powered entirely by free APIs with zero configuration required.
 
-- Real-time weather data for any location on Earth
-- 7-day forecasts with hourly trend charts
-- Interactive maps using OpenStreetMap (free, no key)
-- CRUD-based saved weather records stored in browser localStorage
-- Smart AI-style travel tips generated deterministically from weather data
-- Data export to JSON, CSV, Markdown, and PDF formats
-- Beautiful glassmorphism UI with animated 3D weather orb, Framer Motion animations, and Recharts graphs
-
-**Everything runs 100% free.** No paid APIs, no billing cards, no accounts required for any feature.
+### Live Demo
+**🚀 https://pm-weather-ai-full-stack-weather-ap-zeta.vercel.app/**
 
 ---
 
 ## ✅ Assessment Completion
 
-### Tech Assessment #1 — Frontend ✅
-| Requirement | Status | Implementation |
-|---|---|---|
-| Location input (zip, GPS, city, landmark) | ✅ | SearchPanel with geocoding via Open-Meteo + Nominatim |
-| Get current weather from real APIs | ✅ | Open-Meteo Forecast API |
-| Show useful weather details clearly | ✅ | CurrentWeatherCard with 6 stat cards |
-| Current location via GPS | ✅ | Browser Geolocation API + reverse geocoding |
-| Icons/images/design standards | ✅ | WMO weather code emoji mapping + glassmorphism UI |
-| 5-day forecast | ✅ | ForecastGrid with 7-day view |
-| Graceful error handling | ✅ | ErrorMessage component with retry |
-| JavaScript frontend framework | ✅ | Next.js 14 with React 18 |
-| Web-first, responsive | ✅ | Tailwind CSS responsive grid, mobile-friendly |
+### Tech Assessment #1 — Frontend
 
-### Tech Assessment #2 — Backend ✅
 | Requirement | Status | Implementation |
 |---|---|---|
-| Location + date range weather retrieval | ✅ | RecordForm with date range picker |
-| Store location, dates, weather, notes in DB | ✅ | localStorage CRUD via lib/storage.ts |
-| CREATE weather records | ✅ | createRecord() |
-| READ previous records | ✅ | getRecords() + SavedRecords component |
-| UPDATE stored records | ✅ | updateRecord() + inline edit form |
-| DELETE records | ✅ | deleteRecord() with confirm UX |
-| Validate date ranges | ✅ | validateDateRange() in lib/storage.ts |
-| Validate location exists / fuzzy match | ✅ | Multi-provider geocoding with fallback |
-| Additional API — Maps | ✅ | Leaflet + OpenStreetMap (free, no key) |
-| Additional API — Creative | ✅ | Open-Meteo Air Quality + smart tips |
-| Export JSON, CSV, Markdown, PDF | ✅ | lib/export.ts with client-side download |
-| Show API calls and error handling | ✅ | app/api/ route handlers with full error responses |
+| Location input — city, zip, GPS, landmark | ✅ Complete | Multi-provider geocoding: Open-Meteo + Nominatim + OSM |
+| Real-time weather from live APIs | ✅ Complete | Open-Meteo Forecast API — free, no key |
+| Useful weather details displayed clearly | ✅ Complete | Temperature, feels like, humidity, wind, UV, precipitation, sunrise/sunset |
+| Current location via GPS | ✅ Complete | Browser Geolocation API + reverse geocoding via Nominatim |
+| Icons and design standards | ✅ Complete | WMO weather code emoji system (100+ conditions) + glassmorphism UI |
+| 5-day forecast | ✅ Complete | 7-day forecast grid implemented |
+| Graceful error handling | ✅ Complete | ErrorMessage component with retry, dismiss, and descriptive messages |
+| JavaScript frontend framework | ✅ Complete | Next.js 14 + React 18 |
+| Web-first, responsive | ✅ Complete | Tailwind CSS responsive grid — desktop, tablet, mobile |
+
+### Tech Assessment #2 — Backend
+
+| Requirement | Status | Implementation |
+|---|---|---|
+| Location + date range weather retrieval | ✅ Complete | RecordForm with date range picker and validation |
+| Store location, dates, weather, notes | ✅ Complete | localStorage CRUD via lib/storage.ts |
+| CREATE weather records | ✅ Complete | `createRecord()` with UUID generation |
+| READ previous records | ✅ Complete | `getRecords()` + SavedRecords component |
+| UPDATE stored records | ✅ Complete | `updateRecord()` with inline edit form |
+| DELETE records | ✅ Complete | `deleteRecord()` with double-confirm UX |
+| Validate date ranges | ✅ Complete | `validateDateRange()` — checks format, order, max 365 days |
+| Validate location / fuzzy match | ✅ Complete | 4-provider geocoding chain with fallback |
+| Additional API — Maps | ✅ Complete | Leaflet + OpenStreetMap — free, no API key |
+| Additional creative feature | ✅ Complete | Deterministic smart travel tips from weather logic |
+| Export JSON, CSV, Markdown, PDF | ✅ Complete | Client-side export via lib/export.ts |
+| API calls and error handling shown | ✅ Complete | app/api/ route handlers with typed error responses |
 
 ### Full Stack ✅
-- Both assessments completed
-- Clean separation of frontend components, backend API routes, and utility libraries
-- Deployable to Vercel free tier with zero configuration
+
+- Complete Next.js App Router architecture
+- Separated frontend components, backend API routes, and utility libraries
+- Deployed to Vercel free tier — zero configuration
 
 ---
 
 ## ✨ Features
 
-### 🔍 Smart Location Search
-- Search by **city name** (London, Tokyo, New York)
-- Search by **GPS coordinates** (40.7128,-74.0060)
-- Search by **postal code** (90210, SW1A 1AA)
-- Search by **landmark** (Eiffel Tower, Times Square)
-- **Current location** via browser Geolocation API
-- **Recent search history** saved to localStorage
-- Multi-provider geocoding with automatic fallback
+<details>
+<summary><strong>🔍 Smart Location Search</strong></summary>
 
-### ☀️ Current Weather
-- Temperature + feels like
-- Weather condition with WMO code mapping (100+ conditions)
-- Humidity + comfort label
-- Wind speed + compass direction
-- Precipitation (current + rain)
-- UV index with safety rating
-- Today's high/low
+- Search by **city name** — London, Tokyo, Dubai
+- Search by **GPS coordinates** — `40.7128,-74.0060`
+- Search by **postal code** — `90210`, `SW1A 1AA`
+- Search by **landmark** — Eiffel Tower, Times Square
+- **Current location** via browser Geolocation API
+- **Recent search history** saved to localStorage with clear option
+- 4-provider geocoding chain: Open-Meteo → Nominatim postal → Nominatim text → coordinate fallback
+
+</details>
+
+<details>
+<summary><strong>☀️ Current Weather Card</strong></summary>
+
+- Temperature + feels like (apparent temperature)
+- Weather condition — mapped from WMO codes (100+ conditions)
+- Humidity with comfort label (Very Dry → Very Humid)
+- Wind speed + compass direction (16-point compass)
+- Precipitation (current) + rain amount
+- UV index with safety rating (Low → Extreme)
+- Today's high and low temperatures
 - Sunrise and sunset times
 - Timezone display
-- Animated 3D weather orb
+- Animated 3D weather orb that reflects condition
 
-### 📅 7-Day Forecast
-- Daily weather condition emoji
-- High/low temperatures
-- Rain probability
-- Max wind speed
-- UV index max
-- Responsive grid (2 → 4 → 7 columns)
+</details>
 
-### 📊 Interactive Charts (Recharts)
+<details>
+<summary><strong>📅 7-Day Forecast</strong></summary>
+
+- Weather condition emoji per day
+- Daily high and low temperatures
+- Rain probability percentage
+- Maximum wind speed
+- UV index maximum
+- Responsive grid: 2 columns mobile → 4 tablet → 7 desktop
+
+</details>
+
+<details>
+<summary><strong>📊 Interactive Charts</strong></summary>
+
 - **Temperature trend** — 48-hour area chart
 - **Rain probability** — 48-hour bar chart
 - **Wind speed** — 48-hour area chart
-- Tabbed interface
+- Tab switching between chart types
 - Custom glassmorphism tooltip
-- Responsive container
+- Recharts with fully responsive container
+- Data every 3 hours for visual clarity
 
-### 🗺️ Interactive Map
-- Leaflet + OpenStreetMap (completely free, no API key)
-- Custom styled marker with popup
-- 5km radius circle overlay
+</details>
+
+<details>
+<summary><strong>🗺️ Interactive Map</strong></summary>
+
+- Leaflet + OpenStreetMap tiles — completely free, no API key
+- Custom gradient marker with coordinate popup
+- 5km radius circle overlay around location
 - External link to OpenStreetMap
-- SSR-safe dynamic import
+- SSR-safe with dynamic import
 
-### 💡 Smart Travel Tips
-- Deterministic AI-style tips based on weather data
-- Categories: Rain, UV, Wind, Heat, Cold, Snow, Thunderstorm, Humidity
-- Severity levels: Info, Warning, Danger, Success
-- No paid AI API — pure weather logic
+</details>
 
-### 💾 CRUD Saved Records (Full Backend Assessment)
-- **CREATE** — Save any weather search with dates and notes
-- **READ** — View all saved records with expandable details
-- **UPDATE** — Edit location, dates, notes inline
-- **DELETE** — Delete with double-confirm UX
-- Stored in browser localStorage (no account needed)
+<details>
+<summary><strong>💡 Smart Travel Tips</strong></summary>
+
+- Generated deterministically from weather data — no paid AI API
+- 10+ condition categories: Rain, UV, Wind, Heat, Cold, Snow, Thunderstorm, Humidity, Outlook
+- 4 severity levels: Info (blue), Warning (amber), Danger (red), Success (green)
+- Context-aware descriptions with specific thresholds and actionable advice
+
+</details>
+
+<details>
+<summary><strong>💾 CRUD Saved Records</strong></summary>
+
+- **CREATE** — Save any weather search with custom date range and notes
+- **READ** — View all records with expandable detail panels
+- **UPDATE** — Edit location, dates, and notes with inline form
+- **DELETE** — Delete with double-confirm safety UX
+- Stored in browser localStorage — no account, no database setup
 - Records persist across browser sessions
 
-### 📤 Export
-- **JSON** — Full structured data
-- **CSV** — Spreadsheet-compatible
-- **Markdown** — Human-readable formatted tables
-- **PDF** — Professional report via jsPDF + autoTable
-- All generated and downloaded client-side
+</details>
 
-### 🎨 Design & UX
-- Glassmorphism cards with backdrop blur
-- Gradient background with ambient orbs
-- Framer Motion entrance animations
-- Animated 3D weather orb (CSS + Framer Motion)
-- Custom scrollbar
-- Loading skeleton states
-- Keyboard accessible
-- ARIA labels throughout
-- Mobile-first responsive layout
+<details>
+<summary><strong>📤 Export</strong></summary>
+
+- **JSON** — Full structured data with all weather snapshots
+- **CSV** — Excel/Sheets compatible with all fields
+- **Markdown** — Formatted tables, human-readable
+- **PDF** — Professional landscape A4 report via jsPDF
+- All generated client-side — no upload, no paid service
+
+</details>
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technology | Why |
+| Category | Technology | Reason |
 |---|---|---|
-| **Framework** | Next.js 14 (App Router) | SSR, API routes, free Vercel deploy |
-| **Language** | TypeScript | Type safety, better DX |
-| **Styling** | Tailwind CSS | Utility-first, responsive, fast |
-| **Animations** | Framer Motion | Smooth, professional transitions |
-| **Charts** | Recharts | Responsive, composable charts |
+| **Framework** | Next.js 14 (App Router) | SSR, API routes, free Vercel deployment |
+| **Language** | TypeScript | Full type safety across frontend and backend |
+| **Styling** | Tailwind CSS | Utility-first, responsive, fast iteration |
+| **Animations** | Framer Motion | Smooth entrance animations and transitions |
+| **Charts** | Recharts | Composable, responsive chart library |
 | **Maps** | Leaflet + react-leaflet | Free, no key, OpenStreetMap tiles |
-| **Icons** | Lucide React | Consistent, lightweight icons |
-| **PDF Export** | jsPDF + jspdf-autotable | Client-side PDF, no paid service |
-| **Date utils** | date-fns | Lightweight date formatting |
-| **Weather API** | Open-Meteo | 100% free, no key, high quality |
-| **Geocoding** | Open-Meteo Geocoding | Free, no key |
-| **Reverse Geocode** | Nominatim (OSM) | Free, no key |
-| **Maps tiles** | OpenStreetMap | Free, no key |
-| **Storage** | Browser localStorage | No server/DB needed |
-| **Deployment** | Vercel free tier | Zero config for Next.js |
+| **Icons** | Lucide React | Consistent, lightweight, tree-shakeable |
+| **PDF Export** | jsPDF + jspdf-autotable | Client-side PDF generation, no paid service |
+| **Date utilities** | date-fns | Lightweight date formatting |
+| **Weather API** | Open-Meteo | 100% free, no key, WMO-standard data |
+| **Geocoding** | Open-Meteo Geocoding | Free, no key, city search |
+| **Reverse Geocode** | Nominatim (OSM) | Free, no key, GPS → place name |
+| **Map tiles** | OpenStreetMap | Free, no key, global coverage |
+| **Storage** | Browser localStorage | Zero setup, no account, persists across sessions |
+| **Deployment** | Vercel free tier | Zero config Next.js deployment |
 
 ---
 
-## 📁 Folder Structure
+## 📁 Project Structure
 
 ```
 pm-weather-ai-assessment/
-├── README.md                    # This file
-├── package.json                 # Dependencies
-├── next.config.js               # Next.js config
-├── tsconfig.json                # TypeScript config
-├── tailwind.config.ts           # Tailwind config
-├── postcss.config.js            # PostCSS config
-├── .gitignore                   # Git ignore rules
-├── .env.example                 # Environment variables (none required)
-│
-├── app/                         # Next.js App Router
-│   ├── layout.tsx               # Root layout, metadata, fonts
-│   ├── page.tsx                 # Main page — all state management
-│   ├── globals.css              # Global styles, glassmorphism, animations
-│   └── api/                     # Backend API routes
-│       ├── weather/
-│       │   └── route.ts         # GET /api/weather?location=...
-│       ├── records/
-│       │   └── route.ts         # GET/POST /api/records (documented)
-│       ├── records/[id]/
-│       │   └── route.ts         # GET/PUT/DELETE /api/records/:id
-│       └── export/
-│           └── route.ts         # POST /api/export (JSON/CSV)
-│
-├── components/                  # React components
-│   ├── Header.tsx               # Top navigation bar
-│   ├── SearchPanel.tsx          # Search input + location button
-│   ├── CurrentWeatherCard.tsx   # Main weather display card
-│   ├── ForecastGrid.tsx         # 7-day forecast cards
-│   ├── WeatherCharts.tsx        # Recharts temperature/rain/wind
-│   ├── WeatherMap.tsx           # Leaflet map component
-│   ├── WeatherVisual3D.tsx      # Animated 3D weather orb
-│   ├── TravelTips.tsx           # Smart travel tips display
-│   ├── SavedRecords.tsx         # CRUD records list
-│   ├── RecordForm.tsx           # Create/edit record form
-│   ├── PMAcceleratorCard.tsx    # About section + builder info
-│   ├── LoadingState.tsx         # Skeleton loading state
-│   └── ErrorMessage.tsx        # Error display with retry
-│
-└── lib/                         # Utility libraries
-    ├── types.ts                 # All TypeScript interfaces
-    ├── weather.ts               # Open-Meteo API, WMO codes, formatting
-    ├── geocode.ts               # Location geocoding (multi-provider)
-    ├── tips.ts                  # Deterministic weather tips generator
-    ├── storage.ts               # localStorage CRUD + validation
-    ├── export.ts                # JSON/CSV/Markdown/PDF export
-    └── utils.ts                 # cn(), formatUnit(), uvLabel(), etc.
+├── app/
+│   ├── layout.tsx                  # Root layout, metadata, fonts
+│   ├── page.tsx                    # Main page — state management hub
+│   ├── globals.css                 # Global styles, glassmorphism, animations
+│   └── api/
+│       ├── weather/route.ts        # GET /api/weather?location=...
+│       ├── records/route.ts        # GET/POST /api/records
+│       ├── records/[id]/route.ts   # GET/PUT/DELETE /api/records/:id
+│       └── export/route.ts         # POST /api/export
+├── components/
+│   ├── Header.tsx                  # Navigation bar with links
+│   ├── SearchPanel.tsx             # Search input + location button + history
+│   ├── CurrentWeatherCard.tsx      # Main weather display + stat grid
+│   ├── ForecastGrid.tsx            # 7-day forecast cards
+│   ├── WeatherCharts.tsx           # Recharts temperature/rain/wind tabs
+│   ├── WeatherMap.tsx              # Leaflet map with custom marker
+│   ├── WeatherVisual3D.tsx         # Animated CSS 3D weather orb
+│   ├── TravelTips.tsx              # Smart tips display grid
+│   ├── SavedRecords.tsx            # CRUD records list with expand/edit/delete
+│   ├── RecordForm.tsx              # Create and edit record form
+│   ├── PMAcceleratorCard.tsx       # About section + builder info + tech stack
+│   ├── LoadingState.tsx            # Skeleton loading with animated rings
+│   └── ErrorMessage.tsx           # Error display with retry and dismiss
+├── lib/
+│   ├── types.ts                    # All TypeScript interfaces
+│   ├── weather.ts                  # Open-Meteo API, WMO codes, formatters
+│   ├── geocode.ts                  # 4-provider geocoding chain
+│   ├── tips.ts                     # Deterministic weather tips generator
+│   ├── storage.ts                  # localStorage CRUD + date validation
+│   ├── export.ts                   # JSON/CSV/Markdown/PDF export utilities
+│   └── utils.ts                    # cn(), uvLabel(), humidityLabel(), etc.
+├── README.md
+├── package.json
+├── next.config.js
+├── tsconfig.json
+├── tailwind.config.ts
+├── postcss.config.js
+├── .gitignore
+└── .env.example
 ```
 
 ---
 
-## 🚀 Setup & Run Locally
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- **Node.js** version 18.17 or higher
-- **npm** version 9 or higher
-
-Check your versions:
 ```bash
-node --version   # should be 18.x or 20.x
-npm --version    # should be 9.x or 10.x
+node --version   # 18.17 or higher
+npm --version    # 9.0 or higher
 ```
 
-### Step 1 — Clone or copy the project
+### Install and Run
 
 ```bash
-# If cloning from GitHub:
-git clone https://github.com/ahmadrrrtx/pm-weather-ai-assessment.git
-cd pm-weather-ai-assessment
-```
+# Clone the repository
+git clone https://github.com/ahmadrrrtx/PM-Weather-AI-Full-Stack-Weather-Application.git
 
-Or simply copy all the project files into a folder named `pm-weather-ai-assessment`.
+# Navigate into the project
+cd PM-Weather-AI-Full-Stack-Weather-Application
 
-### Step 2 — Install dependencies
-
-```bash
+# Install dependencies
 npm install
-```
 
-This installs all packages listed in `package.json`. No paid packages. All free.
-
-### Step 3 — Run development server
-
-```bash
+# Start development server
 npm run dev
 ```
 
-Open your browser at: **http://localhost:3000**
+Open **http://localhost:3000** — the app starts immediately with no configuration needed.
 
-The app starts immediately. No environment variables needed.
-
-### Step 4 — Build for production (optional)
+### Build for Production
 
 ```bash
 npm run build
@@ -308,46 +303,39 @@ npm run start
 
 ## 🔐 Environment Variables
 
-**None are required.** The app works completely without any `.env` file.
+**None required.** The app works completely out of the box.
 
-All APIs used are free and require no authentication:
-- Open-Meteo — no key
-- OpenStreetMap tiles — no key
-- Nominatim geocoding — no key
-
-The `.env.example` file is included for completeness and future extension:
+All APIs are free and require no authentication:
 
 ```env
-# No paid API keys required.
-# This app works 100% without any environment variables.
+# .env.example
+# No API keys needed — all services are free and keyless
 
-# Optional: Customize app name
-# NEXT_PUBLIC_APP_NAME=PM Weather AI
+# Open-Meteo Weather API  — no key
+# Open-Meteo Geocoding    — no key  
+# Nominatim (OSM)         — no key
+# OpenStreetMap tiles     — no key
+# localStorage            — no key
 ```
 
 ---
 
 ## 🌐 API Reference
 
-### `GET /api/weather`
+### `GET /api/weather?location={query}`
 
-Fetches real-time weather + forecast for a location.
+Geocodes the query and returns full weather data from Open-Meteo.
 
-**Query Parameters:**
-
-| Parameter | Type | Required | Description |
-|---|---|---|---|
-| `location` | string | ✅ | City name, coordinates (lat,lon), postal code, or landmark |
-
-**Examples:**
+**Supported query formats:**
 ```
-GET /api/weather?location=London
-GET /api/weather?location=40.7128,-74.0060
-GET /api/weather?location=90210
-GET /api/weather?location=Eiffel+Tower
+/api/weather?location=London
+/api/weather?location=40.7128,-74.0060
+/api/weather?location=90210
+/api/weather?location=Eiffel+Tower
+/api/weather?location=Dubai
 ```
 
-**Success Response (200):**
+**Success response (200):**
 ```json
 {
   "location": {
@@ -371,91 +359,37 @@ GET /api/weather?location=Eiffel+Tower
     "uvIndex": 3,
     "rain": 0.0
   },
-  "daily": [
-    {
-      "date": "2024-01-15",
-      "weatherCode": 61,
-      "tempMax": 15.1,
-      "tempMin": 9.3,
-      "precipitationSum": 2.4,
-      "precipitationProbability": 75,
-      "windSpeedMax": 35.2,
-      "uvIndexMax": 2,
-      "sunrise": "2024-01-15T08:02",
-      "sunset": "2024-01-15T16:19"
-    }
-    // ... 6 more days
-  ],
-  "hourly": {
-    "time": ["2024-01-15T00:00", "2024-01-15T01:00"],
-    "temperature": [11.2, 10.8],
-    "precipitationProbability": [20, 25],
-    "windSpeed": [18.4, 17.2]
-  },
+  "daily": [ /* 7 days */ ],
+  "hourly": { /* 48 hours */ },
   "timezone": "Europe/London",
   "fetchedAt": "2024-01-15T10:30:00.000Z"
 }
 ```
 
-**Error Responses:**
-
-| Status | Description |
-|---|---|
-| `400` | Missing or empty location parameter |
-| `404` | Location not found / geocoding failed |
-| `500` | Weather API upstream error |
-
+**Error responses:**
 ```json
-// 404 Example
-{
-  "error": "Could not find location: \"xyznotreal\". Try a city name, coordinates (lat,lon), or postal code."
-}
-```
+// 400 — missing location
+{ "error": "Location parameter is required." }
 
----
+// 404 — not found
+{ "error": "Could not find location: \"xyz\". Try a city name, coordinates (lat,lon), or postal code." }
+
+// 500 — upstream API failure
+{ "error": "Failed to fetch weather data: ..." }
+```
 
 ### `GET /api/records`
-
-Returns documentation about localStorage-based record storage.
-
-```json
-{
-  "message": "Records are stored in browser localStorage. Use client-side storage utilities.",
-  "info": "See lib/storage.ts for CRUD implementation."
-}
-```
-
----
-
 ### `POST /api/records`
-
-Validates a record creation payload (client handles actual storage).
-
-**Request Body:**
-```json
-{
-  "locationInput": "London",
-  "startDate": "2024-01-15",
-  "endDate": "2024-01-20",
-  "notes": "Business trip"
-}
-```
-
----
-
 ### `GET /api/records/:id`
 ### `PUT /api/records/:id`
 ### `DELETE /api/records/:id`
 
-Documented endpoints that reference client-side storage operations.
-
----
+Documented REST endpoints. Actual data persistence is handled client-side via `lib/storage.ts` using localStorage.
 
 ### `POST /api/export`
 
-Server-side export for JSON or CSV formats.
+Server-side export endpoint supporting `json` and `csv` formats.
 
-**Request Body:**
 ```json
 {
   "records": [...],
@@ -463,132 +397,52 @@ Server-side export for JSON or CSV formats.
 }
 ```
 
-Supported formats: `"json"`, `"csv"`
-
 ---
 
-### External APIs Used
-
-#### Open-Meteo Forecast API
-```
-https://api.open-meteo.com/v1/forecast
-```
-- Free tier: Unlimited requests
-- No API key required
-- Documentation: https://open-meteo.com/en/docs
-
-**Parameters used:**
-```
-current=temperature_2m,apparent_temperature,relative_humidity_2m,
-        precipitation,rain,weather_code,wind_speed_10m,
-        wind_direction_10m,is_day,uv_index
-
-daily=weather_code,temperature_2m_max,temperature_2m_min,
-      precipitation_sum,precipitation_probability_max,
-      wind_speed_10m_max,uv_index_max,sunrise,sunset
-
-hourly=temperature_2m,precipitation_probability,wind_speed_10m
-
-timezone=auto
-forecast_days=7
-wind_speed_unit=kmh
-temperature_unit=celsius
-precipitation_unit=mm
-```
-
-#### Open-Meteo Geocoding API
-```
-https://geocoding-api.open-meteo.com/v1/search
-```
-- Free tier: Unlimited requests
-- No API key required
-- Searches by city name, returns lat/lon
-
-#### Nominatim (OpenStreetMap)
-```
-https://nominatim.openstreetmap.org/search
-https://nominatim.openstreetmap.org/reverse
-```
-- Free tier: 1 request/second (respected via user-agent)
-- No API key required
-- Used for: reverse geocoding, postal code lookup, landmark search
-
-#### OpenStreetMap Tiles
-```
-https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-```
-- Free, no key required
-- Used by Leaflet for map rendering
-
----
-
-## 💾 Database / Storage
-
-This app uses **browser localStorage** for all persistent data storage. This was a deliberate design decision:
+## 💾 Storage Architecture
 
 ### Why localStorage?
-- ✅ **Zero setup** — no database account, no credentials
-- ✅ **Works offline** — data persists locally in the browser
-- ✅ **Reviewer-friendly** — anyone can run and test instantly
-- ✅ **No CORS issues** — no external database calls
-- ✅ **Survives refreshes** — data persists until browser storage is cleared
 
-### Storage Key
-```
-pm_weather_records_v1
-```
+| Factor | localStorage | External Database |
+|---|---|---|
+| Setup time | Zero | Account + credentials + schema |
+| Works offline | ✅ | ❌ |
+| Reviewer friction | None | High |
+| Data persistence | Per browser | Global |
+| CRUD complexity | Identical | Identical |
+
+The CRUD logic in `lib/storage.ts` is architecturally identical to a database implementation. Swapping to Supabase or PostgreSQL would require changing only the storage layer, not the component logic.
 
 ### Record Schema
+
 ```typescript
 interface WeatherRecord {
-  id: string;              // UUID v4 (crypto.randomUUID())
-  locationInput: string;   // Raw user input ("London", "40.71,-74.00")
-  resolvedName: string;    // Geocoded display name ("London, United Kingdom")
-  latitude: number;        // Decimal degrees
-  longitude: number;       // Decimal degrees
-  startDate: string;       // ISO date "YYYY-MM-DD"
-  endDate: string;         // ISO date "YYYY-MM-DD"
+  id: string;           // UUID v4 via crypto.randomUUID()
+  locationInput: string; // Raw user input
+  resolvedName: string;  // Geocoded display name
+  latitude: number;      // Decimal degrees
+  longitude: number;     // Decimal degrees
+  startDate: string;     // "YYYY-MM-DD"
+  endDate: string;       // "YYYY-MM-DD"
   weatherJson: WeatherData | null; // Full weather snapshot
-  notes: string;           // User notes
-  createdAt: string;       // ISO timestamp
-  updatedAt: string;       // ISO timestamp
+  notes: string;         // User notes
+  createdAt: string;     // ISO timestamp
+  updatedAt: string;     // ISO timestamp
 }
 ```
 
-### CRUD Operations (lib/storage.ts)
+### Date Validation Rules
 
-```typescript
-// CREATE
-createRecord(formData, resolvedName, lat, lon, weatherData)
-
-// READ ALL
-getRecords() → WeatherRecord[]
-
-// READ ONE
-getRecordById(id) → WeatherRecord | null
-
-// UPDATE
-updateRecord(id, updates) → WeatherRecord | null
-
-// DELETE
-deleteRecord(id) → boolean
-
-// VALIDATE
-validateDateRange(startDate, endDate) → { valid: boolean, error?: string }
+```
+✅ Both dates required
+✅ End date must be >= start date
+✅ Range cannot exceed 365 days
+✅ Dates must be valid ISO format
 ```
 
-### Date Range Validation Rules
-- Both dates required
-- End date must be ≥ start date
-- Date range cannot exceed 365 days
-- Dates must be valid ISO format
+### Optional: Connect to Supabase (free tier)
 
-### If You Want a Real Database (Optional)
-
-To connect to Supabase (free tier), you would:
-
-1. Create a project at https://supabase.com (free)
-2. Run this SQL in the Supabase SQL editor:
+If you want persistent cross-device storage, create a free Supabase project and run:
 
 ```sql
 create table weather_records (
@@ -605,268 +459,124 @@ create table weather_records (
   updated_at timestamptz default now()
 );
 
--- Enable Row Level Security
 alter table weather_records enable row level security;
 
--- Allow public access (for assessment demo)
-create policy "Allow all" on weather_records
-  for all using (true) with check (true);
+create policy "Allow all"
+  on weather_records for all
+  using (true) with check (true);
 ```
 
-3. Add to `.env.local`:
+Then add to `.env.local`:
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
-4. Install Supabase client:
-```bash
-npm install @supabase/supabase-js
-```
-
-The current implementation uses localStorage as the default, which works for this assessment with zero configuration.
-
 ---
 
-## 📤 Export Functionality
+## 🗺️ External APIs Used
 
-All exports are generated **client-side** in the browser — no server upload, no paid service.
-
-### JSON Export
-- Full structured record array
-- Pretty-printed with 2-space indentation
-- Includes all weather snapshot data
-- File: `weather_records.json`
-
-### CSV Export
-- All key fields as columns
-- Proper CSV escaping (quotes, commas, newlines)
-- Compatible with Excel, Google Sheets
-- File: `weather_records.csv`
-
-**Columns:**
+### Open-Meteo Forecast API
 ```
-ID, Location Input, Resolved Name, Latitude, Longitude,
-Start Date, End Date, Temperature, Feels Like, Humidity,
-Wind Speed, Weather Condition, UV Index, Notes, Created At, Updated At
+https://api.open-meteo.com/v1/forecast
+Free tier: Unlimited · No key required
+Docs: https://open-meteo.com/en/docs
 ```
 
-### Markdown Export
-- Human-readable formatted tables
-- One section per record
-- Includes all weather details
-- Attribution footer
-- File: `weather_records.md`
+Parameters used:
+```
+current    → temperature_2m, apparent_temperature, relative_humidity_2m,
+             precipitation, rain, weather_code, wind_speed_10m,
+             wind_direction_10m, is_day, uv_index
 
-### PDF Export
-- Professional landscape A4 layout
-- Dark branded header
-- Auto-formatted table via jspdf-autotable
-- Page numbers
-- Footer attribution
-- File: `weather_records.pdf`
+daily      → weather_code, temperature_2m_max, temperature_2m_min,
+             precipitation_sum, precipitation_probability_max,
+             wind_speed_10m_max, uv_index_max, sunrise, sunset
+
+hourly     → temperature_2m, precipitation_probability, wind_speed_10m
+
+timezone   → auto
+```
+
+### Open-Meteo Geocoding API
+```
+https://geocoding-api.open-meteo.com/v1/search
+Free tier: Unlimited · No key required
+Used for: city name → lat/lon
+```
+
+### Nominatim (OpenStreetMap)
+```
+https://nominatim.openstreetmap.org/search
+https://nominatim.openstreetmap.org/reverse
+Free tier: 1 req/sec · No key required
+Used for: reverse geocoding, postal codes, landmark search
+```
+
+### OpenStreetMap Tiles
+```
+https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+Free: Unlimited for reasonable use · No key required
+Used by: Leaflet map rendering
+```
 
 ---
 
 ## 🎨 Design Decisions
 
-### 1. localStorage Over External Database
-**Decision:** Use browser localStorage instead of Supabase or PostgreSQL.
-**Reason:** Zero setup friction. Any reviewer can clone and run instantly without creating accounts or adding credentials. The CRUD logic is identical architecturally — swapping to a real DB would be a one-file change in `lib/storage.ts`.
+**Glassmorphism UI** — Premium frosted glass aesthetic using `backdrop-filter: blur()` and semi-transparent backgrounds. Carefully applied to remain readable and professional, not overdone.
 
-### 2. Open-Meteo Over OpenWeatherMap
-**Decision:** Use Open-Meteo as the primary weather API.
-**Reason:** Completely free with no API key, no rate limiting for reasonable use, excellent data quality (WMO standard), and includes current + daily + hourly in one request.
+**CSS Animated Orb over Three.js** — The 3D weather orb uses Framer Motion and CSS gradients instead of WebGL. This achieves a premium visual at near-zero bundle cost with zero SSR risk. Three.js would add ~500KB and requires canvas lifecycle management.
 
-### 3. Leaflet Over Google Maps
-**Decision:** Use Leaflet with OpenStreetMap tiles instead of Google Maps API.
-**Reason:** Google Maps API requires billing card. Leaflet + OSM is 100% free, no key, and produces beautiful maps.
+**Open-Meteo over OpenWeatherMap** — Completely free with no API key, no rate limiting for reasonable use, excellent WMO-standard data quality, and returns current + daily + hourly in a single request.
 
-### 4. CSS Animated Orb Over Three.js
-**Decision:** Use Framer Motion + CSS gradients for the 3D weather orb instead of @react-three/fiber.
-**Reason:** Three.js adds ~500KB to bundle, can cause SSR issues, and requires careful canvas management. The CSS orb achieves a premium visual effect at near-zero cost with zero SSR risk.
+**Leaflet over Google Maps** — Google Maps requires a billing card even for free tier. Leaflet + OpenStreetMap is 100% free, no key, and renders beautiful interactive maps.
 
-### 5. Deterministic Tips Over AI API
-**Decision:** Generate travel tips from weather data logic instead of calling an AI API.
-**Reason:** No paid API, no latency, fully predictable, and shows creative algorithmic thinking. The tips cover 10+ weather conditions with context-appropriate severity levels.
+**Deterministic Tips over AI API** — Travel tips are generated from weather thresholds — no paid AI, no latency, fully predictable, and demonstrates creative algorithmic product thinking.
 
-### 6. Multi-Provider Geocoding
-**Decision:** Chain Open-Meteo Geocoding → Nominatim Postal → Nominatim Free Text for location resolution.
-**Reason:** Maximizes success rate for any input type (city, landmark, postal code, GPS coordinates) without a single paid service.
+**localStorage over External Database** — Zero setup friction means any reviewer can clone and test instantly. The CRUD architecture is identical to a real database implementation.
 
-### 7. Next.js App Router
-**Decision:** Use Next.js 14 App Router instead of Pages Router or a separate backend.
-**Reason:** Unified frontend + backend in one repo, easy Vercel deployment, built-in API routes, React Server Components compatible, and free SSR.
-
-### 8. Glassmorphism Design
-**Decision:** Use glassmorphism with gradient backgrounds instead of a plain white/dark theme.
-**Reason:** Premium visual quality that stands out in a review scenario. Carefully applied — not overdone — to maintain readability and professionalism.
+**Multi-provider Geocoding** — 4-provider chain maximizes success rate for any input type. Open-Meteo handles city names best, Nominatim handles postal codes and landmarks, coordinate parsing handles GPS input directly.
 
 ---
 
 ## 🚀 Deploy to Vercel (Free)
 
-Vercel is the recommended deployment platform for this project.
-
-### Step-by-Step
-
-**1. Push to GitHub**
-
-Create a new repository at https://github.com/new
-
-Upload all project files (or use the GitHub web interface to add files).
-
-**2. Import to Vercel**
-
-- Go to https://vercel.com
-- Sign in with your GitHub account
-- Click **"Add New Project"**
-- Click **"Import"** next to your repository
-- Vercel auto-detects Next.js — no settings to change
-
-**3. Deploy**
-
-- Click **"Deploy"**
-- Wait 1–2 minutes for the build to complete
-- Your app is live at: `https://your-project-name.vercel.app`
-
-**4. No Environment Variables Needed**
-
-The app works without any environment configuration.
-If you add Supabase later, add env vars in:
-`Vercel Dashboard → Project → Settings → Environment Variables`
-
-**5. Automatic Redeploys**
-
-Any push to the `main` branch auto-redeploys.
-
-### Build Settings (Auto-Detected)
-```
-Framework:        Next.js
-Build Command:    npm run build
-Output Directory: .next
-Install Command:  npm install
-```
-
----
-
-## 🌐 Deploy to Netlify (Alternative)
-
-Netlify can host Next.js apps with a plugin.
-
-### Step-by-Step
-
-**1. Install the Netlify Next.js plugin**
-
-Add `netlify.toml` to your project root:
-
-```toml
-[build]
-  command = "npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-```
-
-Install the plugin:
 ```bash
-npm install --save-dev @netlify/plugin-nextjs
+# 1. Push to GitHub (already done)
+
+# 2. Go to vercel.com → Add New Project → Import your repo
+
+# 3. Vercel auto-detects Next.js — no settings to change
+
+# 4. Click Deploy
+
+# 5. App is live in ~60 seconds
 ```
 
-**2. Deploy**
+No environment variables needed. No configuration needed.
 
-- Go to https://netlify.com
-- Click **"Add new site"** → **"Import an existing project"**
-- Connect GitHub and select your repo
-- Build settings are read from `netlify.toml`
-- Click **"Deploy site"**
-
-> **Note:** Vercel is strongly preferred for Next.js. Netlify requires the plugin and may have occasional compatibility issues with the App Router. Use Vercel for the most reliable experience.
+**Live at:** https://pm-weather-ai-full-stack-weather-ap-zeta.vercel.app/
 
 ---
 
-
-## ✅ Submission Checklist
-
-- [x] Public GitHub repository
-- [x] Complete README with setup instructions
-- [x] Requirements file (`package.json`)
-- [x] App includes my name: **Muhammad Ahmad**
-- [x] PM Accelerator information section included
-- [x] Tech Assessment #1 (Frontend) complete
-- [x] Tech Assessment #2 (Backend) complete
-- [x] Full-Stack candidate
-- [x] Real API data (no fake/static weather)
-- [x] Free APIs only (no paid keys)
-- [x] No paid API dependencies
-- [x] Responsive design (desktop + tablet + mobile)
-- [x] 5-day forecast (7-day implemented)
-- [x] Current location support
-- [x] CRUD implemented
-- [x] Export implemented (JSON, CSV, Markdown, PDF)
-- [x] Error handling throughout
-- [x] Loading states
-- [x] Deploy-ready (Vercel free)
-- [x] Demo video script prepared
-- [ ] Submit via Google Form: https://forms.gle/XfM3Xrzpo9sbHr4g8
-- [ ] Share GitHub with community@pmaccelerator.io and hr@pmaccelerator.io
-- [ ] Record and upload 2-minute demo video
-
----
-
-## 🔮 Future Improvements
-
-| Feature | Description | Priority |
-|---|---|---|
-| **Supabase integration** | Optional DB backend via env vars, with localStorage fallback | High |
-| **Weather alerts** | Real-time severe weather alerts from Open-Meteo | High |
-| **PWA support** | Service worker, offline mode, install prompt | Medium |
-| **Multi-language** | i18n for weather conditions and UI | Medium |
-| **Dark/Light theme** | Theme toggle with system preference detection | Medium |
-| **Air quality index** | Open-Meteo AQI overlay on map | Medium |
-| **Weather comparison** | Side-by-side comparison of two locations | Low |
-| **Historical data** | Past weather charts using Open-Meteo historical API | Low |
-| **Unit toggle** | Celsius/Fahrenheit, km/h/mph, mm/inch | Low |
-| **Share weather** | Generate shareable link for current view | Low |
-| **Notifications** | Browser push notifications for weather alerts | Low |
-
----
-
-## 🏢 About PM Accelerator
-
-**PM Accelerator** helps aspiring product and AI builders gain practical experience through cohort-based product development, mentorship, and real-world AI product work.
-
-This project was built as part of the **AI Engineer Internship Technical Assessment**, demonstrating:
-- Full-stack Next.js development
-- Real API integration (weather, geocoding, maps)
-- Database-equivalent CRUD using localStorage
-- Professional UI/UX with modern design patterns
-- Clean code architecture suitable for production
-
-**Assessment Document:** https://docs.google.com/document/d/1FjBFbXEySCKolfsNGrTpRja9upf9T7BxOXakLM6Q5f0/edit?tab=t.0
-
-**Submit your assessment:** https://forms.gle/XfM3Xrzpo9sbHr4g8
-
----
-
-## 👤 About the Builder
-
-**Muhammad Ahmad** — Full-Stack AI Engineer
-
-| | |
-|---|---|
-| 🌐 Portfolio | https://ahmad-multi-verse.lovable.app |
-| 💻 GitHub | https://github.com/ahmadrrrtx |
-| 🔗 LinkedIn | https://www.linkedin.com/in/ahmadrrrtx |
 
 ---
 
 ## 📄 License
 
-This project is built for the PM Accelerator AI Engineer Internship Assessment.
-Free to review, fork, and learn from.
+Built for PM Accelerator AI Engineer Internship Assessment.
+Free to review, learn from, and fork.
 
 ---
 
-_Built with ❤️ by Muhammad Ahmad · PM Accelerator AI Engineer Internship · 2024_
+<div align="center">
+
+**Built with ❤️ by [Muhammad Ahmad](https://ahmad-multi-verse.lovable.app)**
+
+[🌐 Portfolio](https://ahmad-multi-verse.lovable.app) · [💻 GitHub](https://github.com/ahmadrrrtx) · [🔗 LinkedIn](https://www.linkedin.com/in/ahmadrrrtx)
+
+*PM Accelerator AI Engineer Internship · 2025*
+
+</div>
