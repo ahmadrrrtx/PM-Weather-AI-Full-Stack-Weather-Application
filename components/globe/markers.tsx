@@ -10,10 +10,9 @@ import { getCondition } from "@/lib/weather-codes";
 import { createMarkerMaterial } from "@/components/globe/shaders";
 
 /* ─────────────────────────────
-   Markers — live pulse from 30 cities
-   (one multi-location Open-Meteo call)
-   + the selected location. Hover shows
-   a glass tooltip; click selects.
+   Markers — live pulse from cities
+   + selected location. Hover shows
+   tooltip; click selects.
    ───────────────────────────── */
 
 interface MarkersProps {
@@ -41,7 +40,7 @@ function MarkerDot({ point, isSelected, onSelect }: MarkerDotProps) {
     () => latLonToVector(point.location.latitude, point.location.longitude),
     [point.location.latitude, point.location.longitude],
   );
-  const scale = isSelected ? 1.9 : 1;
+  const scale = isSelected ? 1.7 : 1;
 
   useFrame(({ clock }) => {
     material.uniforms.uTime!.value = clock.elapsedTime;
@@ -65,7 +64,7 @@ function MarkerDot({ point, isSelected, onSelect }: MarkerDotProps) {
       <Billboard>
         <mesh
           material={material}
-          scale={[0.085 * scale, 0.085 * scale, 1]}
+          scale={[0.075 * scale, 0.075 * scale, 1]}
           onPointerOver={onPointerOver}
           onPointerOut={onPointerOut}
           onClick={(e) => {
@@ -83,17 +82,16 @@ function MarkerDot({ point, isSelected, onSelect }: MarkerDotProps) {
           distanceFactor={7}
           style={{ pointerEvents: "none", zIndex: 40 }}
         >
-          <div className="glass-strong pointer-events-none select-none rounded-xl px-3 py-2 text-center shadow-2xl">
-            <p className="whitespace-nowrap text-[11px] font-semibold text-white">
+          <div className="pointer-events-none select-none rounded-lg border border-white/[0.08] bg-[#0c1018]/90 px-3 py-2 text-center backdrop-blur-xl shadow-xl">
+            <p className="whitespace-nowrap text-[11px] font-medium text-white/80">
               {point.location.name}
               {point.location.country ? `, ${point.location.country}` : ""}
             </p>
-            <p className="mt-0.5 whitespace-nowrap text-[10px] text-white/55">
-              <span className="tabular font-bold text-aurora-cyan">
+            <p className="mt-0.5 whitespace-nowrap text-[10px] text-white/40">
+              <span className="tabular font-semibold text-white/70">
                 {Math.round(point.temperature)}°
               </span>
-              {" · "}
-              {condition.label}
+              {condition.label ? ` · ${condition.label}` : ""}
             </p>
           </div>
         </Html>

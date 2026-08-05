@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 
 /* ─────────────────────────────
    Tabs — accessible tablist with
-   keyboard navigation (←/→/Home/End),
-   animated active indicator.
+   keyboard navigation, animated
+   active indicator.
    ───────────────────────────── */
 
 export interface TabItem {
@@ -48,7 +48,7 @@ export function Tabs({ items, value, onChange, className, ariaLabel }: TabsProps
       aria-label={ariaLabel}
       onKeyDown={onKeyDown}
       className={cn(
-        "glass inline-flex items-center gap-0.5 rounded-xl p-1",
+        "inline-flex items-center gap-0.5 rounded-lg border border-white/[0.05] bg-white/[0.02] p-0.5",
         className,
       )}
     >
@@ -64,24 +64,24 @@ export function Tabs({ items, value, onChange, className, ariaLabel }: TabsProps
             tabIndex={active ? 0 : -1}
             onClick={() => onChange(item.id)}
             className={cn(
-              "relative flex items-center gap-1.5 rounded-lg px-3 py-1.5",
-              "text-xs font-semibold tracking-wide transition-colors duration-200",
-              active ? "text-white" : "text-white/45 hover:text-white/80",
+              "relative flex items-center gap-1.5 rounded-md px-3 py-1.5",
+              "text-[12px] font-medium transition-colors duration-150",
+              active ? "text-white/90" : "text-white/35 hover:text-white/55",
             )}
           >
             {active && (
               <motion.span
                 layoutId={`${baseId}-tab-pill`}
-                className="absolute inset-0 rounded-lg bg-gradient-to-r from-aurora-sky/25 to-aurora-violet/25 border border-aurora-cyan/25"
-                transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                className="absolute inset-0 rounded-md bg-white/[0.06]"
+                transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
               />
             )}
             {item.icon && (
-              <span className={cn("relative z-10", active ? "text-aurora-cyan" : "")}>
+              <span className={cn("relative z-10", active ? "text-accent/80" : "")}>
                 {item.icon}
               </span>
             )}
-            <span className="relative z-10">{item.label}</span>
+            <span className="relative z-10 hidden sm:inline">{item.label}</span>
           </button>
         );
       })}

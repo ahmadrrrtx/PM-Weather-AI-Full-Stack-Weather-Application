@@ -6,24 +6,26 @@ interface SectionLabelProps {
   icon?: React.ReactNode;
 }
 
-/** Small-caps HUD section label with hairline. */
+/** Minimal section label. */
 export function SectionLabel({ children, className, icon }: SectionLabelProps) {
   return (
     <div
       className={cn(
-        "flex items-center gap-2.5 select-none",
+        "flex items-center gap-2 select-none",
         className,
       )}
     >
       {icon ? (
-        <span className="flex items-center justify-center h-5 w-5 rounded-md bg-aurora-cyan/10 text-aurora-cyan border border-aurora-cyan/20">
+        <span className="flex items-center justify-center text-white/25">
           {icon}
         </span>
       ) : (
-        <span className="h-px w-5 bg-aurora-cyan/40" aria-hidden />
+        <span className="h-px w-4 bg-white/10" aria-hidden />
       )}
-      <span className="hud-label">{children}</span>
-      <span className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" aria-hidden />
+      <span className="text-[11px] font-medium uppercase tracking-wider text-white/30">
+        {children}
+      </span>
+      <span className="flex-1 h-px bg-white/[0.04]" aria-hidden />
     </div>
   );
 }

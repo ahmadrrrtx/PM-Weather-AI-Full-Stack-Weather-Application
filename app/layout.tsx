@@ -5,8 +5,7 @@ import { SkipLink } from "@/components/ui/skip-link";
 import "./globals.css";
 
 /* ─────────────────────────────
-   Root layout — fonts, metadata,
-   providers, texture preloads.
+   Root layout.
    ───────────────────────────── */
 
 const inter = Inter({
@@ -24,22 +23,19 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://novaweather.vercel.app"),
   title: {
-    default: "NovaWeather — Next Generation 3D Weather Experience",
+    default: "NovaWeather — 3D Weather Experience",
     template: "%s · NovaWeather",
   },
   description:
-    "A cinematic 3D weather experience: real-time WebGL Earth with day/night cycles, live radar & satellite maps, air quality, astronomy and climate analytics. Powered entirely by free open data.",
+    "Real-time 3D weather experience with WebGL Earth, radar, satellite, air quality, astronomy, and climate analytics. Built on free open data.",
   keywords: [
     "weather",
     "3D earth",
     "WebGL",
     "radar",
-    "satellite",
     "air quality",
     "astronomy",
     "open data",
-    "open-meteo",
-    "Next.js",
   ],
   authors: [{ name: "Muhammad Ahmad", url: "https://rrrtx-systems.com/" }],
   creator: "RRRTX Systems",
@@ -48,15 +44,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://novaweather.vercel.app",
     siteName: "NovaWeather",
-    title: "NovaWeather — Next Generation 3D Weather Experience",
+    title: "NovaWeather — 3D Weather Experience",
     description:
-      "Real-time WebGL Earth · radar & satellite · air quality · astronomy · climate analytics. 100% free open data.",
+      "Real-time 3D weather experience built on free open data.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NovaWeather — Next Generation 3D Weather Experience",
+    title: "NovaWeather — 3D Weather Experience",
     description:
-      "Real-time WebGL Earth · radar & satellite · air quality · astronomy · climate analytics. 100% free open data.",
+      "Real-time 3D weather experience built on free open data.",
   },
   robots: {
     index: true,
@@ -69,7 +65,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#03060d",
+  themeColor: "#080c14",
   width: "device-width",
   initialScale: 1,
 };
@@ -80,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen font-sans antialiased">
-        {/* Preload globe textures — served from /textures with immutable cache */}
+        {/* Preload globe textures */}
         <link rel="preload" as="image" href="/textures/earth_atmos_2048.jpg" />
         <link rel="preload" as="image" href="/textures/earth_lights_2048.png" />
         <link rel="preload" as="image" href="/textures/earth_clouds_1024.png" />

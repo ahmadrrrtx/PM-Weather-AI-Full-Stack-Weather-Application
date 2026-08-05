@@ -2,7 +2,7 @@
 
 import { Component, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Activity, CalendarRange, Map as MapIcon, Orbit } from "lucide-react";
+import { Activity, CalendarRange, Map as MapIcon, BarChart3 } from "lucide-react";
 import dynamic from "next/dynamic";
 
 import { useAppStore } from "@/lib/store";
@@ -22,13 +22,11 @@ import { AnalyticsPanel } from "@/components/weather/analytics-panel";
 import { SectionLabel } from "@/components/ui/section-label";
 
 /* ─────────────────────────────
-   Dashboard — the mission control
-   right column: tabbed glass panels
-   (Overview · Forecast · Map · Analytics)
-   with staggered entrances.
+   Dashboard — weather panels.
+   Globe left, data right.
    ───────────────────────────── */
 
-/* Heavy client-only chunks, split from the main bundle */
+/* Heavy client-only chunks */
 const EarthGlobe = dynamic(
   () => import("@/components/globe/earth-globe").then((m) => m.EarthGlobe),
   { ssr: false, loading: () => null },
@@ -39,10 +37,10 @@ const WeatherMap = dynamic(
 );
 
 const TABS: Array<{ id: DashboardTab; label: string; icon: ReactNode }> = [
-  { id: "overview", label: "Overview", icon: <Orbit className="h-3 w-3" aria-hidden /> },
-  { id: "forecast", label: "Forecast", icon: <CalendarRange className="h-3 w-3" aria-hidden /> },
-  { id: "map", label: "Map", icon: <MapIcon className="h-3 w-3" aria-hidden /> },
-  { id: "analytics", label: "Analytics", icon: <Activity className="h-3 w-3" aria-hidden /> },
+  { id: "overview", label: "Today", icon: <BarChart3 className="h-3.5 w-3.5" aria-hidden /> },
+  { id: "forecast", label: "Forecast", icon: <CalendarRange className="h-3.5 w-3.5" aria-hidden /> },
+  { id: "map", label: "Map", icon: <MapIcon className="h-3.5 w-3.5" aria-hidden /> },
+  { id: "analytics", label: "Insights", icon: <Activity className="h-3.5 w-3.5" aria-hidden /> },
 ];
 
 function OverviewTab() {
@@ -60,7 +58,7 @@ function OverviewTab() {
     );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <CurrentPanel current={data.current} locationName={location.name} units={units} />
 
       <div>
@@ -131,21 +129,21 @@ function AnalyticsTab() {
   const tz = forecast.data?.timezone ?? location.timezone ?? "UTC";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {aqi.data && (
-        <GlassCard index={0} className="p-4">
+        <GlassCard index={0} className="p-5">
           <AqiPanel current={aqi.data.current} hourly={aqi.data.hourly} locationName={location.name} />
         </GlassCard>
       )}
 
       {climate.data && (
-        <GlassCard index={1} className="p-4">
+        <GlassCard index={1} className="p-5">
           <AnalyticsPanel climate={climate.data} units={units} locationName={location.name} />
         </GlassCard>
       )}
 
       {astronomy.data && (
-        <GlassCard index={2} className="p-4">
+        <GlassCard index={2} className="p-5">
           <AstronomyPanel days={astronomy.data} timezone={tz} locationName={location.name} />
         </GlassCard>
       )}
@@ -168,31 +166,30 @@ function DashboardInner() {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Keep the active panel in view on small screens when switching tabs
     panelRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }, [tab]);
 
   const activePanel = TAB_COMPONENTS[tab];
 
   return (
-    <GlassCard strong className="flex h-full flex-col overflow-hidden rounded-3xl">
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
       {/* Header */}
-      <div className="flex flex-wrap items-center gap-3 border-b border-white/[0.07] px-4 pb-3 pt-4 sm:px-5">
+      <div className="flex flex-wrap items-center gap-3 border-b border-white/[0.05] px-5 py-3.5">
         <div className="min-w-0">
-          <h2 className="truncate font-display text-sm font-bold tracking-wide text-white">
+          <h2 className="truncate text-[15px] font-semibold text-white/90">
             {location.name}
             {location.country ? (
-              <span className="ml-2 text-xs font-normal text-white/40">{location.country}</span>
+              <span className="ml-2 text-xs font-normal text-white/30">{location.country}</span>
             ) : null}
           </h2>
-          <p className="tabular mt-0.5 text-[10px] text-white/35">
+          <p className="tabular mt-0.5 text-[11px] text-white/25">
             {forecast
               ? `Updated ${formatTime(forecast.fetchedAt, forecast.timezone ?? "UTC", {
                   hour: "2-digit",
                   minute: "2-digit",
                   hour12: false,
-                })} · ${forecast.timezone}`
-              : "Acquiring telemetry…"}
+                })}`
+              : "Loading..."}
           </p>
         </div>
         <div className="ml-auto">
@@ -206,24 +203,24 @@ function DashboardInner() {
       </div>
 
       {/* Panel */}
-      <div ref={panelRef} className="flex-1 overflow-y-auto p-4 sm:p-5">
+      <div ref={panelRef} className="flex-1 overflow-y-auto p-5">
         <AnimatePresence mode="wait">
           <motion.div
             key={tab}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28, ease: "easeOut" }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <Suspense fallback={<PanelSkeleton rows={3} />}>{activePanel()}</Suspense>
           </motion.div>
         </AnimatePresence>
       </div>
-    </GlassCard>
+    </div>
   );
 }
 
-/* Simple error boundary — never a blank screen */
+/* Error boundary */
 export class DashboardBoundary extends Component<
   { children: ReactNode },
   { error: Error | null }
@@ -237,19 +234,19 @@ export class DashboardBoundary extends Component<
   render() {
     if (this.state.error) {
       return (
-        <GlassCard strong className="flex h-full flex-col items-center justify-center gap-4 rounded-3xl p-8 text-center">
-          <p className="text-sm font-semibold text-white/80">Telemetry interrupted</p>
-          <p className="max-w-sm text-xs text-white/45">{this.state.error.message}</p>
+        <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 text-center">
+          <p className="text-sm font-medium text-white/70">Something went wrong</p>
+          <p className="max-w-xs text-xs text-white/35">{this.state.error.message}</p>
           <button
             onClick={() => {
               this.setState({ error: null });
               window.location.reload();
             }}
-            className="rounded-xl border border-aurora-cyan/30 px-4 py-2 text-xs font-semibold text-aurora-cyan transition-colors hover:bg-aurora-cyan/10"
+            className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-xs font-medium text-white/60 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white/80"
           >
-            Reboot console
+            Try again
           </button>
-        </GlassCard>
+        </div>
       );
     }
     return this.props.children;
@@ -260,14 +257,14 @@ export function MissionControl() {
   const location = useAppStore((s) => s.location);
 
   return (
-    <div className="mx-auto grid max-w-[1700px] grid-cols-1 gap-4 px-4 py-4 sm:px-6 lg:h-[calc(100vh-6.5rem)] lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-5">
-      {/* Globe stage */}
-      <div className="relative h-[52vh] overflow-hidden rounded-3xl border border-white/[0.07] lg:h-full lg:min-h-[540px]">
+    <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-5 px-4 py-5 sm:px-6 lg:h-[calc(100vh-3.5rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-6">
+      {/* Globe */}
+      <div className="relative h-[50vh] overflow-hidden rounded-2xl border border-white/[0.06] lg:h-full lg:min-h-[500px]">
         <EarthGlobe />
-        {/* Bottom attribution strip */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between bg-gradient-to-t from-[#03060d]/85 to-transparent px-4 pb-2.5 pt-6 text-[9px] tracking-wide text-white/30">
-          <span>OPEN-METEO · RAINVIEWER · NASA GIBS · OPENFREEMAP</span>
-          <span className="hidden sm:block">3D REAL-TIME EARTH</span>
+        {/* Subtle attribution */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between bg-gradient-to-t from-[#080c14]/80 to-transparent px-4 pb-2 pt-8 text-[9px] tracking-wide text-white/15">
+          <span>Open-Meteo · RainViewer · NASA GIBS</span>
+          <span className="hidden sm:block">Interactive 3D Earth</span>
         </div>
       </div>
 
@@ -276,7 +273,7 @@ export function MissionControl() {
         <DashboardInner />
       </DashboardBoundary>
 
-      {/* Mobile coordinate hint (globe position context) */}
+      {/* Screen reader context */}
       <p className="sr-only">
         Currently viewing {location.name} at {location.latitude.toFixed(2)},{" "}
         {location.longitude.toFixed(2)}.

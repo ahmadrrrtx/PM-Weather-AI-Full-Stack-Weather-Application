@@ -9,7 +9,6 @@ import {
   AXIS_LINE,
   GLASS_TOOLTIP,
   GRID,
-  PALETTE,
   SPLIT_LINE,
   makePrecipFormatter,
   makeTempFormatter,
@@ -17,10 +16,8 @@ import {
 import { monthDayLabel } from "@/lib/format";
 
 /* ─────────────────────────────
-   ClimateChart — last 30 days:
-   mean temperature line + daily
-   precipitation bars, with extremes
-   marked on the line.
+   ClimateChart — 30-day trend:
+   mean temperature + precipitation.
    ───────────────────────────── */
 
 export function ClimateChart({
@@ -42,8 +39,8 @@ export function ClimateChart({
         name: "Hottest",
         coord: [climate.hottest.date, climate.hottest.tempMax],
         value: `H ${fmtTemp(climate.hottest.tempMax)}`,
-        itemStyle: { color: PALETTE.amber },
-        symbolSize: 46,
+        itemStyle: { color: "rgba(245,158,11,0.8)" },
+        symbolSize: 40,
       });
     }
     if (climate.coldest) {
@@ -51,13 +48,13 @@ export function ClimateChart({
         name: "Coldest",
         coord: [climate.coldest.date, climate.coldest.tempMin],
         value: `L ${fmtTemp(climate.coldest.tempMin)}`,
-        itemStyle: { color: PALETTE.sky },
-        symbolSize: 46,
+        itemStyle: { color: "rgba(255,255,255,0.4)" },
+        symbolSize: 40,
       });
     }
 
     return {
-      animationDuration: 900,
+      animationDuration: 700,
       animationEasing: "cubicOut",
       grid: GRID,
       tooltip: {
@@ -65,7 +62,7 @@ export function ClimateChart({
         trigger: "axis",
         axisPointer: {
           type: "line",
-          lineStyle: { color: "rgba(148,180,255,0.25)" },
+          lineStyle: { color: "rgba(255,255,255,0.08)" },
         },
       },
       xAxis: {
@@ -84,7 +81,7 @@ export function ClimateChart({
         },
         {
           type: "value",
-          axisLabel: { ...AXIS_LABEL, formatter: "{value}" },
+          axisLabel: AXIS_LABEL,
           splitLine: { show: false },
         },
       ],
@@ -93,23 +90,23 @@ export function ClimateChart({
           name: "Mean temp",
           type: "line",
           data: points.map((p) => p.tempMean),
-          smooth: 0.25,
+          smooth: 0.2,
           showSymbol: false,
-          lineStyle: { width: 2, color: PALETTE.amber },
-          itemStyle: { color: PALETTE.amber },
+          lineStyle: { width: 2, color: "rgba(255,255,255,0.35)" },
+          itemStyle: { color: "rgba(255,255,255,0.35)" },
           areaStyle: {
             color: {
               type: "linear",
               x: 0, y: 0, x2: 0, y2: 1,
               colorStops: [
-                { offset: 0, color: "rgba(251,191,36,0.18)" },
-                { offset: 1, color: "rgba(251,191,36,0.01)" },
+                { offset: 0, color: "rgba(255,255,255,0.06)" },
+                { offset: 1, color: "rgba(255,255,255,0.01)" },
               ],
             },
           },
           markPoint: {
             data: markPointData,
-            label: { color: "#0b1120", fontSize: 8.5, fontWeight: 700 },
+            label: { color: "#080c14", fontSize: 8, fontWeight: 700 },
             tooltip: { show: false },
           },
           tooltip: { valueFormatter: (v: unknown) => fmtTemp(Number(v)) },
@@ -119,10 +116,10 @@ export function ClimateChart({
           type: "bar",
           yAxisIndex: 1,
           data: points.map((p) => p.precipitation),
-          barMaxWidth: 8,
+          barMaxWidth: 6,
           itemStyle: {
-            borderRadius: [3, 3, 0, 0],
-            color: "rgba(56,189,248,0.55)",
+            borderRadius: [2, 2, 0, 0],
+            color: "rgba(255,255,255,0.12)",
           },
           tooltip: { valueFormatter: (v: unknown) => fmtPrecip(Number(v)) },
         },
@@ -133,7 +130,7 @@ export function ClimateChart({
   return (
     <EChart
       option={option}
-      className="h-52 w-full"
+      className="h-48 w-full"
       ariaLabel="Last 30 days climate chart with mean temperature and precipitation"
     />
   );

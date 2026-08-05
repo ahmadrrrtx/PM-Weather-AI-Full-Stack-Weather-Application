@@ -3,8 +3,8 @@ import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /* ─────────────────────────────
-   GlassCard — floating glass panel
-   with entrance choreography.
+   GlassCard — subtle glass panel
+   with optional entrance animation.
    ───────────────────────────── */
 
 interface GlassCardProps extends Omit<HTMLMotionProps<"div">, "ref"> {
@@ -20,18 +20,18 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     return (
       <motion.div
         ref={ref}
-        initial={{ opacity: 0, y: reduce ? 0 : 18 }}
+        initial={{ opacity: 0, y: reduce ? 0 : 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.55,
-          delay: Math.min(0.08 * index, 0.5),
-          ease: [0.22, 1, 0.36, 1],
+          duration: 0.4,
+          delay: Math.min(0.06 * index, 0.3),
+          ease: [0.25, 1, 0.5, 1],
         }}
         className={cn(
           strong ? "glass-strong" : "glass",
-          "rounded-2xl",
+          "rounded-xl",
           hover &&
-            "transition-all duration-300 hover:border-aurora-cyan/30 hover:shadow-[0_28px_70px_-28px_rgba(56,189,248,0.25)]",
+            "transition-all duration-200 hover:bg-white/[0.04] hover:border-white/[0.08]",
           className,
         )}
         {...props}

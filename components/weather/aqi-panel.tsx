@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Wind } from "lucide-react";
 import type { AirQualityPoint } from "@/lib/types";
 import { aqiLabel } from "@/lib/format";
 import { SectionLabel } from "@/components/ui/section-label";
@@ -13,14 +12,13 @@ const AqiChart = dynamic(
   () => import("@/components/charts/aqi-chart").then((m) => m.AqiChart),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-40 w-full rounded-xl" label="Loading chart" />,
+    loading: () => <Skeleton className="h-36 w-full rounded-xl" label="Loading chart" />,
   },
 );
 
 /* ─────────────────────────────
-   AqiPanel — live air quality:
-   US AQI hero + component breakdown
-   vs WHO guidelines + 24h trend.
+   AqiPanel — air quality index
+   with component breakdown.
    ───────────────────────────── */
 
 interface Props {
@@ -35,7 +33,7 @@ interface ComponentDef {
   key: ComponentKey;
   label: string;
   unit: string;
-  limit: number; // WHO guideline (µg/m³, CO in µg/m³)
+  limit: number;
 }
 
 const COMPONENTS: ComponentDef[] = [
@@ -52,62 +50,59 @@ export function AqiPanel({ current, hourly, locationName }: Props) {
   const max = Math.max(current.usAqi, 50);
 
   return (
-    <section aria-label={`Air quality in ${locationName}`} className="space-y-4">
+    <section aria-label={`Air quality in ${locationName}`} className="space-y-5">
       <div className="flex items-center gap-5">
-        {/* AQI hero */}
-        <div className="relative flex h-24 w-24 shrink-0 items-center justify-center">
+        {/* AQI ring */}
+        <div className="relative flex h-20 w-20 shrink-0 items-center justify-center">
           <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90" aria-hidden>
-            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(148,180,255,0.1)" strokeWidth="7" />
+            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="6" />
             <motion.circle
               cx="50" cy="50" r="42" fill="none"
               stroke={aqi.tone}
-              strokeWidth="7"
+              strokeWidth="6"
               strokeLinecap="round"
               strokeDasharray={`${(Math.min(current.usAqi, max) / max) * 264} 264`}
               initial={{ strokeDasharray: 0 }}
               animate={{ strokeDasharray: `${(Math.min(current.usAqi, max) / max) * 264} 264` }}
-              transition={{ duration: 1.1, ease: "easeOut" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             />
           </svg>
           <div className="absolute text-center">
-            <NumberTicker value={Math.round(current.usAqi)} className="tabular font-display text-2xl font-bold text-white" />
-            <p className="text-[8px] uppercase tracking-widest text-white/40">US AQI</p>
+            <NumberTicker value={Math.round(current.usAqi)} className="tabular font-display text-xl font-bold text-white/90" />
+            <p className="text-[7px] uppercase tracking-widest text-white/25">AQI</p>
           </div>
         </div>
 
         <div>
-          <p className="text-sm font-semibold" style={{ color: aqi.tone }}>
+          <p className="text-[13px] font-semibold" style={{ color: aqi.tone }}>
             {aqi.label}
           </p>
-          <p className="mt-1 flex items-center gap-1.5 text-xs text-white/45">
-            <Wind className="h-3.5 w-3.5 text-aurora-violet" aria-hidden />
-            Live air quality index
-          </p>
+          <p className="mt-0.5 text-[11px] text-white/30">Air quality index</p>
         </div>
       </div>
 
       {/* Component breakdown */}
       <div>
         <SectionLabel>Particulates &amp; Gases</SectionLabel>
-        <div className="mt-2.5 grid grid-cols-2 gap-x-5 gap-y-2">
+        <div className="mt-2.5 grid grid-cols-2 gap-x-5 gap-y-1.5">
           {COMPONENTS.map((c) => {
             const value = current[c.key];
             const pct = Math.min((value / c.limit) * 100, 100);
             const over = value > c.limit;
             return (
               <div key={c.key} className="flex items-center gap-2">
-                <span className="w-12 shrink-0 text-[10px] text-white/50">{c.label}</span>
-                <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.07]">
+                <span className="w-10 shrink-0 text-[10px] text-white/30">{c.label}</span>
+                <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.04]">
                   <motion.div
-                    className={`h-full rounded-full ${over ? "bg-aurora-rose" : "bg-gradient-to-r from-aurora-mint to-aurora-sky"}`}
+                    className={`h-full rounded-full ${over ? "bg-red-400/60" : "bg-white/20"}`}
                     initial={{ width: 0 }}
                     animate={{ width: `${pct}%` }}
-                    transition={{ duration: 0.9, ease: "easeOut" }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
                   />
                 </div>
-                <span className={`tabular w-16 text-right text-[10px] ${over ? "text-aurora-rose" : "text-white/60"}`}>
+                <span className={`tabular w-14 text-right text-[10px] ${over ? "text-red-400/80" : "text-white/40"}`}>
                   {value >= 1000 ? (value / 1000).toFixed(1) + "k" : Math.round(value)}{" "}
-                  <span className="text-white/30">{c.unit}</span>
+                  <span className="text-white/20">{c.unit}</span>
                 </span>
               </div>
             );

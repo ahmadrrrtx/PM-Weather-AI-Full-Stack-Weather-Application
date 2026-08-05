@@ -20,15 +20,14 @@ import { cn } from "@/lib/utils";
 
 /* ─────────────────────────────
    HourlyChart — 48h timeline with
-   Temperature / Precipitation / Wind
-   perspectives (dual-axis where needed).
+   Temperature / Precipitation / Wind.
    ───────────────────────────── */
 
 type Mode = "temperature" | "precipitation" | "wind";
 
 const MODES: Array<{ id: Mode; label: string }> = [
   { id: "temperature", label: "Temperature" },
-  { id: "precipitation", label: "Precipitation" },
+  { id: "precipitation", label: "Precip" },
   { id: "wind", label: "Wind" },
 ];
 
@@ -59,13 +58,13 @@ export function HourlyChart({
     const gusts = hourly.map((h) => h.windGusts);
 
     const base = {
-      animationDuration: 700,
+      animationDuration: 600,
       animationEasing: "cubicOut" as const,
       grid: GRID,
       tooltip: {
         ...GLASS_TOOLTIP,
         trigger: "axis" as const,
-        valueFormatter: (v: unknown, _dataIndex?: number) => {
+        valueFormatter: (v: unknown) => {
           if (mode === "temperature") return `${fmtTemp(Number(v))}`;
           if (mode === "precipitation") return String(v);
           return String(v);
@@ -97,38 +96,31 @@ export function HourlyChart({
             name: "Temperature",
             type: "line",
             data: temps,
-            smooth: 0.35,
+            smooth: 0.3,
             symbol: "circle",
-            symbolSize: 4,
+            symbolSize: 3,
             showSymbol: false,
-            lineStyle: { width: 2.5, color: PALETTE.cyan },
-            itemStyle: { color: PALETTE.cyan },
+            lineStyle: { width: 2, color: PALETTE.white40 },
+            itemStyle: { color: PALETTE.white40 },
             areaStyle: {
               color: {
                 type: "linear",
                 x: 0, y: 0, x2: 0, y2: 1,
                 colorStops: [
-                  { offset: 0, color: "rgba(103,232,249,0.28)" },
-                  { offset: 1, color: "rgba(103,232,249,0.02)" },
+                  { offset: 0, color: "rgba(255,255,255,0.08)" },
+                  { offset: 1, color: "rgba(255,255,255,0.01)" },
                 ],
               },
-            },
-            markLine: {
-              silent: true,
-              symbol: "none",
-              label: { color: "rgba(148,180,255,0.5)", fontSize: 9, formatter: "feels {c}°" },
-              lineStyle: { color: "rgba(167,139,250,0.35)", type: "dashed", width: 1 },
-              data: [],
             },
           },
           {
             name: "Feels like",
             type: "line",
             data: feels,
-            smooth: 0.35,
+            smooth: 0.3,
             showSymbol: false,
-            lineStyle: { width: 1.2, color: "rgba(167,139,250,0.55)" },
-            itemStyle: { color: PALETTE.violet },
+            lineStyle: { width: 1, color: "rgba(255,255,255,0.12)" },
+            itemStyle: { color: "rgba(255,255,255,0.12)" },
           },
         ],
       };
@@ -140,8 +132,6 @@ export function HourlyChart({
         yAxis: [
           {
             type: "value" as const,
-            name: "mm",
-            nameTextStyle: { color: "rgba(148,180,255,0.4)", fontSize: 9 },
             axisLabel: AXIS_LABEL,
             splitLine: SPLIT_LINE,
           },
@@ -157,17 +147,10 @@ export function HourlyChart({
             name: "Precipitation",
             type: "bar",
             data: precip,
-            barMaxWidth: 14,
+            barMaxWidth: 12,
             itemStyle: {
-              borderRadius: [4, 4, 0, 0],
-              color: {
-                type: "linear",
-                x: 0, y: 0, x2: 0, y2: 1,
-                colorStops: [
-                  { offset: 0, color: PALETTE.sky },
-                  { offset: 1, color: "rgba(56,189,248,0.25)" },
-                ],
-              },
+              borderRadius: [3, 3, 0, 0],
+              color: "rgba(255,255,255,0.15)",
             },
             tooltip: { valueFormatter: (v: unknown) => fmtPrecip(Number(v)) },
           },
@@ -178,8 +161,8 @@ export function HourlyChart({
             data: probs,
             smooth: 0.3,
             showSymbol: false,
-            lineStyle: { width: 1.6, color: PALETTE.violet, type: "dashed" },
-            itemStyle: { color: PALETTE.violet },
+            lineStyle: { width: 1.2, color: PALETTE.white20, type: "dashed" },
+            itemStyle: { color: PALETTE.white20 },
           },
         ],
       };
@@ -191,8 +174,6 @@ export function HourlyChart({
       yAxis: [
         {
           type: "value" as const,
-          name: units.speed === "mph" ? "mph" : "km/h",
-          nameTextStyle: { color: "rgba(148,180,255,0.4)", fontSize: 9 },
           axisLabel: AXIS_LABEL,
           splitLine: SPLIT_LINE,
         },
@@ -204,15 +185,15 @@ export function HourlyChart({
           data: wind,
           smooth: 0.3,
           showSymbol: false,
-          lineStyle: { width: 2.2, color: PALETTE.mint },
-          itemStyle: { color: PALETTE.mint },
+          lineStyle: { width: 2, color: PALETTE.white40 },
+          itemStyle: { color: PALETTE.white40 },
           areaStyle: {
             color: {
               type: "linear",
               x: 0, y: 0, x2: 0, y2: 1,
               colorStops: [
-                { offset: 0, color: "rgba(110,231,183,0.22)" },
-                { offset: 1, color: "rgba(110,231,183,0.02)" },
+                { offset: 0, color: "rgba(255,255,255,0.06)" },
+                { offset: 1, color: "rgba(255,255,255,0.01)" },
               ],
             },
           },
@@ -224,8 +205,8 @@ export function HourlyChart({
           data: gusts,
           smooth: 0.3,
           showSymbol: false,
-          lineStyle: { width: 1.2, color: PALETTE.amber, type: "dashed" },
-          itemStyle: { color: PALETTE.amber },
+          lineStyle: { width: 1, color: "rgba(255,255,255,0.1)", type: "dashed" },
+          itemStyle: { color: "rgba(255,255,255,0.1)" },
           tooltip: { valueFormatter: (v: unknown) => fmtSpeed(Number(v)) },
         },
       ],
@@ -241,11 +222,11 @@ export function HourlyChart({
           value={mode}
           onChange={(id) => setMode(id as Mode)}
         />
-        <span className="hidden hud-label sm:block">48 HOUR WINDOW</span>
+        <span className="hidden text-[10px] font-medium uppercase tracking-wider text-white/15 sm:block">48h</span>
       </div>
       <EChart
         option={option}
-        className={cn("h-56 w-full", mode === "precipitation" && "h-60")}
+        className={cn("h-52 w-full", mode === "precipitation" && "h-56")}
         ariaLabel={`Hourly ${mode} chart for the next 48 hours`}
       />
     </div>

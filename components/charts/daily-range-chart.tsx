@@ -16,8 +16,7 @@ import { weekdayLabel } from "@/lib/format";
 
 /* ─────────────────────────────
    DailyRangeChart — floating min/max
-   bars for the 7-day forecast
-   (transparent base + gradient range).
+   bars for the 7-day forecast.
    ───────────────────────────── */
 
 export function DailyRangeChart({
@@ -33,7 +32,7 @@ export function DailyRangeChart({
     const ranges = daily.map((d) => d.tempMax - d.tempMin);
 
     return {
-      animationDuration: 800,
+      animationDuration: 600,
       animationEasing: "cubicOut",
       grid: { ...GRID, top: 30 },
       tooltip: {
@@ -44,8 +43,7 @@ export function DailyRangeChart({
           if (!d) return "";
           return (
             `<b>${weekdayLabel(d.date)}</b><br/>` +
-            `High ${fmt(d.tempMax)} · Low ${fmt(d.tempMin)}<br/>` +
-            `Feels ${fmt(d.apparentMax)} / ${fmt(d.apparentMin)}`
+            `High ${fmt(d.tempMax)} · Low ${fmt(d.tempMin)}`
           );
         },
       },
@@ -66,7 +64,7 @@ export function DailyRangeChart({
           name: "base",
           type: "bar",
           data: mins,
-          barWidth: 16,
+          barWidth: 14,
           stack: "range",
           itemStyle: { color: "transparent" },
           tooltip: { show: false },
@@ -76,16 +74,16 @@ export function DailyRangeChart({
           name: "range",
           type: "bar",
           data: ranges,
-          barWidth: 16,
+          barWidth: 14,
           stack: "range",
           itemStyle: {
-            borderRadius: 8,
+            borderRadius: 7,
             color: {
               type: "linear",
               x: 0, y: 0, x2: 0, y2: 1,
               colorStops: [
-                { offset: 0, color: "rgba(103,232,249,0.9)" },
-                { offset: 1, color: "rgba(79,124,255,0.75)" },
+                { offset: 0, color: "rgba(255,255,255,0.35)" },
+                { offset: 1, color: "rgba(255,255,255,0.12)" },
               ],
             },
           },
@@ -97,7 +95,7 @@ export function DailyRangeChart({
   return (
     <EChart
       option={option}
-      className="h-40 w-full"
+      className="h-36 w-full"
       ariaLabel="Seven day forecast high and low temperature range chart"
     />
   );

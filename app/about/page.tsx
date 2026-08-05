@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Globe, Sparkles, Heart, Compass } from "lucide-react";
+import { ArrowUpRight, Globe, Heart, Compass } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/brand-icons";
 
 import { AuroraBackground } from "@/components/layout/aurora-background";
@@ -12,86 +12,86 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { Badge } from "@/components/ui/badge";
 
 /* ─────────────────────────────
-   About — an elegant developer
-   profile, not an advertisement.
+   About — developer profile.
+   Clean, minimal, professional.
    ───────────────────────────── */
 
 const LINKS = [
   {
     href: "https://rrrtx-systems.com/",
     label: "rrrtx-systems.com",
-    sub: "Official Website",
-    icon: <Globe className="h-4 w-4" aria-hidden />,
+    sub: "Website",
+    icon: <Globe className="h-3.5 w-3.5" aria-hidden />,
   },
   {
     href: "https://github.com/ahmadrrrtx/",
-    label: "github.com/ahmadrrrtx",
+    label: "GitHub",
     sub: "GitHub",
-    icon: <GitHubIcon className="h-4 w-4" />,
+    icon: <GitHubIcon className="h-3.5 w-3.5" />,
   },
   {
     href: "https://www.linkedin.com/in/ahmadrrrtx",
-    label: "linkedin.com/in/ahmadrrrtx",
+    label: "LinkedIn",
     sub: "LinkedIn",
-    icon: <LinkedInIcon className="h-4 w-4" />,
+    icon: <LinkedInIcon className="h-3.5 w-3.5" />,
   },
 ];
 
 const PRINCIPLES = [
   {
-    title: "Free-first engineering",
-    body: "If an excellent free or open-source option exists, NovaWeather uses it — no keys, no accounts, no lock-in.",
+    title: "Free-first",
+    body: "If an excellent free option exists, NovaWeather uses it — no keys, no accounts, no lock-in.",
   },
   {
     title: "Craft over speed",
-    body: "Every animation is choreographed, every panel is intentional. Nothing appears abruptly; nothing distracts.",
+    body: "Every animation is intentional, every panel is considered. Nothing appears abruptly.",
   },
   {
-    title: "Open by default",
-    body: "The code, the data stack, and the design decisions are all documented and open source under MIT.",
+    title: "Open source",
+    body: "Code, data stack, and design decisions are documented and MIT licensed.",
   },
   {
-    title: "Precision matters",
-    body: "Typed data pipelines, unit-tested converters, and strict quality gates — polish survives shipping.",
+    title: "Precision",
+    body: "Typed pipelines, tested converters, strict quality gates — polish survives shipping.",
   },
 ];
 
 const SKILLS = [
-  "Next.js", "React", "TypeScript", "Three.js / WebGL", "Tailwind CSS",
-  "Node.js", "AI & LLM Integration", "Open Data APIs", "MapLibre / GIS",
-  "ECharts / Data Viz", "Design Systems", "Performance Engineering",
+  "Next.js", "React", "TypeScript", "Three.js", "Tailwind CSS",
+  "Node.js", "AI/LLM", "Open Data APIs", "MapLibre",
+  "ECharts", "Design Systems", "Performance",
 ];
 
 const PROJECTS = [
   {
     name: "NovaWeather",
-    role: "Creator & Engineer",
+    role: "Creator",
     year: "2026",
-    body: "The project you&apos;re exploring — a cinematic 3D weather experience built entirely on free open data. Real-time Earth, radar & satellite layers, air quality, astronomy, and climate analytics.",
-    links: [{ href: "https://github.com/ahmadrrrtx/Weather-AI", label: "Source" }],
+    body: "Cinematic 3D weather experience built on free open data. Real-time Earth, radar, satellite, air quality, astronomy, and climate analytics.",
+    links: [{ href: "https://github.com/ahmadrrrtx/NovaWeather", label: "Source" }],
   },
   {
     name: "Weather-AI",
-    role: "Full-stack build",
+    role: "Full-stack",
     year: "2026",
-    body: "A full-stack weather intelligence application with multi-provider geocoding, forecast charts, maps, travel insights, and export tooling — built for the PM Accelerator AI Engineer assessment.",
+    body: "Full-stack weather intelligence with multi-provider geocoding, charts, maps, travel insights, and export tooling.",
     links: [{ href: "https://github.com/ahmadrrrtx/Weather-AI", label: "Source" }],
   },
   {
     name: "RRRTX Systems",
     role: "Founder",
     year: "Now",
-    body: "An engineering studio focused on AI-powered products, spatial interfaces, and open data — where NovaWeather was designed and engineered.",
+    body: "Engineering studio focused on AI-powered products, spatial interfaces, and open data.",
     links: [{ href: "https://rrrtx-systems.com/", label: "Website" }],
   },
 ];
 
 const fade = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.08 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: 0.06 * i, duration: 0.5, ease: [0.25, 1, 0.5, 1] as const },
   }),
 };
 
@@ -104,7 +104,7 @@ export default function AboutPage() {
       <Header />
 
       <main id="main" className="relative z-10">
-        <div className="mx-auto max-w-4xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20">
+        <div className="mx-auto max-w-3xl px-4 pb-16 pt-12 sm:px-6 sm:pt-16">
           {/* Hero */}
           <motion.div
             initial="hidden"
@@ -113,38 +113,32 @@ export default function AboutPage() {
             custom={0}
             className="flex flex-col items-center text-center"
           >
-            {/* Monogram */}
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", bounce: 0.4, duration: 0.9 }}
-              className="relative"
+              transition={{ type: "spring", bounce: 0.3, duration: 0.7 }}
+              className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.03]"
             >
-              <div className="glass-strong flex h-24 w-24 items-center justify-center rounded-3xl">
-                <span className="aurora-text font-display text-3xl font-bold tracking-tight">MA</span>
-              </div>
-              <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border border-aurora-mint/40 bg-[#061020]">
-                <Sparkles className="h-3 w-3 text-aurora-mint" aria-hidden />
-              </span>
+              <span className="font-display text-2xl font-bold text-white/60">MA</span>
             </motion.div>
 
-            <h1 className="mt-6 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-white/90 sm:text-3xl">
               Muhammad Ahmad
             </h1>
-            <p className="mt-2 text-sm font-medium tracking-wide text-aurora-cyan/90">
-              Founder &amp; AI Engineer
-              <span className="mx-2 text-white/25">·</span>
-              <span className="text-white/55">RRRTX Systems</span>
+            <p className="mt-1.5 text-[13px] font-medium text-white/40">
+              Founder & AI Engineer
+              <span className="mx-2 text-white/15">·</span>
+              RRRTX Systems
             </p>
 
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-              <Badge tone="mint">Open Source</Badge>
-              <Badge tone="violet">AI Engineering</Badge>
-              <Badge tone="cyan">Spatial UI</Badge>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+              <Badge>Open Source</Badge>
+              <Badge>AI Engineering</Badge>
+              <Badge>Spatial UI</Badge>
             </div>
 
             {/* Links */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
               {LINKS.map((l) => (
                 <motion.a
                   key={l.href}
@@ -153,12 +147,11 @@ export default function AboutPage() {
                   rel="noreferrer"
                   variants={reduce ? undefined : fade}
                   custom={1}
-                  className="glass group flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-xs font-medium text-white/70 transition-all duration-200 hover:border-aurora-cyan/35 hover:text-white"
+                  className="group flex items-center gap-2 rounded-lg border border-white/[0.05] bg-white/[0.02] px-3.5 py-2 text-[12px] font-medium text-white/45 transition-colors duration-150 hover:border-white/[0.08] hover:text-white/65"
                 >
                   {l.icon}
-                  <span className="hidden sm:inline">{l.label}</span>
-                  <span className="sm:hidden">{l.sub}</span>
-                  <ArrowUpRight className="h-3 w-3 text-white/25 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-aurora-cyan" aria-hidden />
+                  <span>{l.label}</span>
+                  <ArrowUpRight className="h-3 w-3 text-white/15 transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
                 </motion.a>
               ))}
             </div>
@@ -166,65 +159,58 @@ export default function AboutPage() {
 
           {/* Bio */}
           <motion.div
-            initial={reduce ? undefined : { opacity: 0, y: 24 }}
+            initial={reduce ? undefined : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-14"
+            transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+            className="mt-12"
           >
-            <GlassCard className="p-7 sm:p-9">
-              <div className="flex items-center gap-2.5">
-                <Compass className="h-4 w-4 text-aurora-cyan" aria-hidden />
-                <h2 className="hud-label">The Builder</h2>
-                <span className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" aria-hidden />
+            <GlassCard className="p-6 sm:p-8">
+              <div className="flex items-center gap-2">
+                <Compass className="h-3.5 w-3.5 text-white/25" aria-hidden />
+                <h2 className="text-[10px] font-medium uppercase tracking-wider text-white/25">About</h2>
+                <span className="h-px flex-1 bg-white/[0.04]" aria-hidden />
               </div>
-              <p className="mt-5 text-sm leading-7 text-white/65 sm:text-[15px] sm:leading-8">
-                I&apos;m Muhammad Ahmad — an AI engineer and the founder of{" "}
-                <a href="https://rrrtx-systems.com/" target="_blank" rel="noreferrer" className="text-aurora-cyan/90 underline decoration-aurora-cyan/30 underline-offset-4 hover:text-aurora-cyan">
-                  RRRTX Systems
-                </a>
-                . I build products where intelligence meets interface: cinematic
-                real-time experiences, AI-powered tooling, and interfaces that feel
-                like instruments rather than websites.
+              <p className="mt-4 text-[13px] leading-7 text-white/50 sm:text-[14px] sm:leading-7">
+                I build products where intelligence meets interface — real-time
+                experiences, AI-powered tooling, and interfaces that feel like
+                instruments rather than websites.
               </p>
-              <p className="mt-4 text-sm leading-7 text-white/55 sm:text-[15px] sm:leading-8">
-                NovaWeather is that philosophy distilled — a weather experience
-                designed like mission control and built entirely on free, open data.
-                No paid APIs, no keys, no tracking. Just careful engineering: a
-                WebGL Earth with a real day/night terminator, live radar and
-                satellite layers, air quality, astronomy, and 30-day climate
-                analytics — all documented, tested, and open source.
+              <p className="mt-3 text-[13px] leading-7 text-white/35 sm:text-[14px] sm:leading-7">
+                NovaWeather is that philosophy — a weather experience designed like
+                mission control and built entirely on free, open data. No paid APIs,
+                no keys, no tracking.
               </p>
-              <div className="mt-6 flex items-center gap-2 text-xs text-white/35">
-                <Heart className="h-3.5 w-3.5 text-aurora-rose" aria-hidden />
-                Crafted with obsession for detail.
+              <div className="mt-4 flex items-center gap-1.5 text-[11px] text-white/20">
+                <Heart className="h-3 w-3 text-white/20" aria-hidden />
+                Crafted with attention to detail.
               </div>
             </GlassCard>
           </motion.div>
 
           {/* Principles */}
-          <div className="mt-12">
+          <div className="mt-10">
             <motion.h2
-              initial={reduce ? undefined : { opacity: 0, y: 16 }}
+              initial={reduce ? undefined : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="hud-label mb-5 text-center"
+              transition={{ duration: 0.5 }}
+              className="mb-4 text-center text-[10px] font-medium uppercase tracking-wider text-white/20"
             >
               Principles
             </motion.h2>
-            <div className="grid gap-3.5 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2">
               {PRINCIPLES.map((p, i) => (
                 <motion.div
                   key={p.title}
-                  initial={reduce ? undefined : { opacity: 0, y: 18 }}
+                  initial={reduce ? undefined : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.05, duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
                 >
-                  <GlassCard className="h-full p-6" hover>
-                    <h3 className="font-display text-sm font-semibold text-white">{p.title}</h3>
-                    <p className="mt-2.5 text-xs leading-6 text-white/50">{p.body}</p>
+                  <GlassCard className="h-full p-5" hover>
+                    <h3 className="text-[13px] font-semibold text-white/70">{p.title}</h3>
+                    <p className="mt-2 text-[11px] leading-5 text-white/30">{p.body}</p>
                   </GlassCard>
                 </motion.div>
               ))}
@@ -232,25 +218,25 @@ export default function AboutPage() {
           </div>
 
           {/* Skills */}
-          <div className="mt-12">
+          <div className="mt-10">
             <motion.h2
-              initial={reduce ? undefined : { opacity: 0, y: 16 }}
+              initial={reduce ? undefined : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="hud-label mb-4 text-center"
+              transition={{ duration: 0.5 }}
+              className="mb-3 text-center text-[10px] font-medium uppercase tracking-wider text-white/20"
             >
               Toolbox
             </motion.h2>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-1.5">
               {SKILLS.map((s, i) => (
                 <motion.span
                   key={s}
-                  initial={reduce ? undefined : { opacity: 0, scale: 0.9 }}
+                  initial={reduce ? undefined : { opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.03, duration: 0.4 }}
-                  className="glass rounded-full px-3.5 py-1.5 text-[11px] font-medium text-white/60 transition-colors duration-200 hover:border-aurora-cyan/35 hover:text-white"
+                  transition={{ delay: i * 0.02, duration: 0.3 }}
+                  className="rounded-md border border-white/[0.04] bg-white/[0.015] px-3 py-1.5 text-[11px] font-medium text-white/35 transition-colors duration-150 hover:border-white/[0.06] hover:text-white/50"
                 >
                   {s}
                 </motion.span>
@@ -259,43 +245,43 @@ export default function AboutPage() {
           </div>
 
           {/* Projects */}
-          <div className="mt-14">
+          <div className="mt-10">
             <motion.h2
-              initial={reduce ? undefined : { opacity: 0, y: 16 }}
+              initial={reduce ? undefined : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="hud-label mb-5 text-center"
+              transition={{ duration: 0.5 }}
+              className="mb-4 text-center text-[10px] font-medium uppercase tracking-wider text-white/20"
             >
               Selected Work
             </motion.h2>
-            <div className="space-y-3.5">
+            <div className="space-y-3">
               {PROJECTS.map((p, i) => (
                 <motion.div
                   key={p.name}
-                  initial={reduce ? undefined : { opacity: 0, y: 18 }}
+                  initial={reduce ? undefined : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.06, duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
                 >
-                  <GlassCard className="p-6" hover>
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h3 className="font-display text-base font-semibold text-white">{p.name}</h3>
-                      <span className="text-[10px] uppercase tracking-widest text-aurora-cyan/70">{p.role}</span>
-                      <span className="tabular ml-auto text-[10px] text-white/30">{p.year}</span>
+                  <GlassCard className="p-5" hover>
+                    <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                      <h3 className="text-[14px] font-semibold text-white/70">{p.name}</h3>
+                      <span className="text-[9px] uppercase tracking-wider text-white/20">{p.role}</span>
+                      <span className="tabular ml-auto text-[10px] text-white/15">{p.year}</span>
                     </div>
-                    <p className="mt-3 text-xs leading-6 text-white/50">{p.body}</p>
-                    <div className="mt-4 flex gap-4">
+                    <p className="mt-2.5 text-[11px] leading-5 text-white/30">{p.body}</p>
+                    <div className="mt-3 flex gap-3">
                       {p.links.map((l) => (
                         <a
                           key={l.href + l.label}
                           href={l.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="group inline-flex items-center gap-1 text-[11px] font-semibold text-aurora-cyan/85 transition-colors hover:text-aurora-cyan"
+                          className="group inline-flex items-center gap-1 text-[10px] font-medium text-white/35 transition-colors hover:text-white/55"
                         >
                           {l.label}
-                          <ArrowUpRight className="h-3 w-3 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                          <ArrowUpRight className="h-2.5 w-2.5 transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
                         </a>
                       ))}
                     </div>
@@ -307,18 +293,18 @@ export default function AboutPage() {
 
           {/* CTA */}
           <motion.div
-            initial={reduce ? undefined : { opacity: 0, y: 20 }}
+            initial={reduce ? undefined : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-14 text-center"
+            transition={{ duration: 0.5 }}
+            className="mt-12 text-center"
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-aurora-sky/90 via-aurora-blue/80 to-aurora-violet/80 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_-12px_rgba(56,189,248,0.6)] transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
+              className="inline-flex items-center gap-2 rounded-lg bg-white/[0.05] border border-white/[0.06] px-5 py-2.5 text-[13px] font-medium text-white/60 transition-all duration-150 hover:bg-white/[0.07] hover:text-white/80"
             >
-              <Compass className="h-4 w-4" aria-hidden />
-              Back to Mission Control
+              <Compass className="h-3.5 w-3.5" aria-hidden />
+              Back to Weather
             </Link>
           </motion.div>
         </div>

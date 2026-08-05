@@ -6,8 +6,8 @@ import { durationLabel, moonPhaseLabel } from "@/lib/format";
 import { SectionLabel } from "@/components/ui/section-label";
 
 /* ─────────────────────────────
-   AstronomyPanel — sun & moon watch:
-   daylight arc, moon phase visual,
+   AstronomyPanel — sun & moon:
+   daylight arc, moon phase,
    rise/set times.
    ───────────────────────────── */
 
@@ -17,15 +17,15 @@ interface Props {
   locationName: string;
 }
 
-/** SVG moon phase visual (0=new, 0.5=full). */
+/** SVG moon phase visual. */
 function MoonPhaseVisual({ phase }: { phase: number }) {
   const p = ((phase % 1) + 1) % 1;
-  const R = 22;
-  const term = Math.abs(Math.cos(p * Math.PI)) * R; // terminator ellipse width
+  const R = 20;
+  const term = Math.abs(Math.cos(p * Math.PI)) * R;
   const waxing = p < 0.5;
 
   return (
-    <svg viewBox="0 0 64 64" className="h-16 w-16" aria-hidden>
+    <svg viewBox="0 0 64 64" className="h-14 w-14" aria-hidden>
       <defs>
         <clipPath id="moon-left">
           <rect x="0" y="0" width="32" height="64" />
@@ -34,7 +34,7 @@ function MoonPhaseVisual({ phase }: { phase: number }) {
           <rect x="32" y="0" width="32" height="64" />
         </clipPath>
       </defs>
-      <circle cx="32" cy="32" r={R} fill="#e6eeff" />
+      <circle cx="32" cy="32" r={R} fill="#dfe9ff" />
       <circle cx="32" cy="32" r={R} fill="#0a1220" clipPath="url(#moon-left)" />
       <ellipse
         cx={waxing ? 32 + term : 32 - term}
@@ -44,12 +44,12 @@ function MoonPhaseVisual({ phase }: { phase: number }) {
         fill="#0a1220"
         clipPath={`url(#moon-${waxing ? "right" : "left"})`}
       />
-      <circle cx="32" cy="32" r={R} fill="none" stroke="rgba(148,180,255,0.25)" strokeWidth="1" />
+      <circle cx="32" cy="32" r={R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
     </svg>
   );
 }
 
-/** Sun day arc — sun position between sunrise and sunset. */
+/** Sun day arc. */
 function DayArc({ day }: { day: AstronomyDay }) {
   const sunrise = day.sunrise ? new Date(day.sunrise) : null;
   const sunset = day.sunset ? new Date(day.sunset) : null;
@@ -69,22 +69,15 @@ function DayArc({ day }: { day: AstronomyDay }) {
   return (
     <div className="relative mt-1">
       <svg viewBox="0 0 100 48" className="w-full" aria-hidden>
-        {/* night ground */}
-        <rect x="0" y="36" width="100" height="12" rx="6" fill="rgba(148,180,255,0.05)" />
-        {/* arc */}
+        <rect x="0" y="36" width="100" height="12" rx="6" fill="rgba(255,255,255,0.02)" />
         <path
           d="M 8 40 Q 50 -22 92 40"
           fill="none"
-          stroke="rgba(103,232,249,0.25)"
+          stroke="rgba(255,255,255,0.06)"
           strokeWidth="1.5"
           strokeDasharray="3 4"
         />
-        {/* sun position */}
-        <circle cx={x} cy={y} r="3.4" fill={isNight ? "rgba(148,180,255,0.3)" : "#fbbf24"}>
-          {!isNight && (
-            <animate attributeName="opacity" values="1;0.6;1" dur="2.6s" repeatCount="indefinite" />
-          )}
-        </circle>
+        <circle cx={x} cy={y} r="3" fill={isNight ? "rgba(255,255,255,0.15)" : "#f59e0b"} />
       </svg>
     </div>
   );
@@ -102,39 +95,39 @@ export function AstronomyPanel({ days, timezone, locationName }: Props) {
   const moonsetT = today.moonset ? new Date(today.moonset).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true, timeZone: tz }) : null;
 
   return (
-    <section aria-label={`Sun and moon in ${locationName}`} className="space-y-4">
+    <section aria-label={`Sun and moon in ${locationName}`} className="space-y-5">
       <div>
-        <SectionLabel icon={<Sunrise className="h-3 w-3" aria-hidden />}>Solar Watch</SectionLabel>
-        <div className="mt-2.5 grid grid-cols-3 gap-2.5 text-center">
-          <div className="glass rounded-xl px-2 py-2.5">
-            <p className="hud-label !text-[8.5px]">Sunrise</p>
-            <p className="tabular mt-1 text-sm font-semibold text-aurora-amber">{sunriseT}</p>
+        <SectionLabel icon={<Sunrise className="h-3 w-3" aria-hidden />}>Solar</SectionLabel>
+        <div className="mt-2.5 grid grid-cols-3 gap-2 text-center">
+          <div className="rounded-lg border border-white/[0.04] bg-white/[0.01] px-2 py-2.5">
+            <p className="text-[9px] font-medium uppercase tracking-wider text-white/20">Sunrise</p>
+            <p className="tabular mt-1 text-[13px] font-semibold text-warm/70">{sunriseT}</p>
           </div>
-          <div className="glass rounded-xl px-2 py-2.5">
-            <p className="hud-label !text-[8.5px]">Daylight</p>
-            <p className="tabular mt-1 text-sm font-semibold text-white">{daylight}</p>
+          <div className="rounded-lg border border-white/[0.04] bg-white/[0.01] px-2 py-2.5">
+            <p className="text-[9px] font-medium uppercase tracking-wider text-white/20">Daylight</p>
+            <p className="tabular mt-1 text-[13px] font-semibold text-white/70">{daylight}</p>
           </div>
-          <div className="glass rounded-xl px-2 py-2.5">
-            <p className="hud-label !text-[8.5px]">Sunset</p>
-            <p className="tabular mt-1 text-sm font-semibold text-aurora-violet">{sunsetT}</p>
+          <div className="rounded-lg border border-white/[0.04] bg-white/[0.01] px-2 py-2.5">
+            <p className="text-[9px] font-medium uppercase tracking-wider text-white/20">Sunset</p>
+            <p className="tabular mt-1 text-[13px] font-semibold text-white/40">{sunsetT}</p>
           </div>
         </div>
         <DayArc day={today} />
       </div>
 
       <div>
-        <SectionLabel icon={<Moon className="h-3 w-3" aria-hidden />}>Lunar Watch</SectionLabel>
+        <SectionLabel icon={<Moon className="h-3 w-3" aria-hidden />}>Lunar</SectionLabel>
         <div className="mt-2.5 flex items-center gap-4">
-          <div className="glass flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/[0.04] bg-white/[0.01]">
             <MoonPhaseVisual phase={today.moonPhase} />
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">{phaseLabel}</p>
-            <p className="tabular mt-1 text-[10px] text-white/45">
-              Moonrise {moonriseT ?? "—"} · Moonset {moonsetT ?? "—"}
+            <p className="text-[13px] font-medium text-white/70">{phaseLabel}</p>
+            <p className="tabular mt-0.5 text-[10px] text-white/25">
+              Rise {moonriseT ?? "—"} · Set {moonsetT ?? "—"}
             </p>
-            <p className="mt-0.5 text-[10px] text-white/30">
-              Phase {Math.round(today.moonPhase * 100)}% of lunation
+            <p className="mt-0.5 text-[10px] text-white/20">
+              {Math.round(today.moonPhase * 100)}% of lunation
             </p>
           </div>
         </div>

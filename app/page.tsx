@@ -6,7 +6,7 @@ import { LocationSearch } from "@/components/search/location-search";
 import { UnitToggle } from "@/components/unit-toggle";
 
 /* ─────────────────────────────
-   Home — Mission Control.
+   Home page.
    ───────────────────────────── */
 
 export default function HomePage() {
@@ -16,7 +16,7 @@ export default function HomePage() {
 
       <Header>
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
-          <div className="w-full max-w-md sm:w-auto sm:min-w-[300px]">
+          <div className="w-full max-w-sm sm:w-auto sm:min-w-[280px]">
             <LocationSearch />
           </div>
           <UnitToggle />

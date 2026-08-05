@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
 
 /* ─────────────────────────────
    NumberTicker — smooth count-up
-   for numeric readouts. Respects
-   prefers-reduced-motion.
+   for numeric readouts.
    ───────────────────────────── */
 
 interface NumberTickerProps {
@@ -15,7 +14,6 @@ interface NumberTickerProps {
   decimals?: number;
   className?: string;
   duration?: number;
-  /** render prefix/suffix separately */
   format?: (v: number) => string;
 }
 
@@ -23,7 +21,7 @@ export function NumberTicker({
   value,
   decimals = 0,
   className,
-  duration = 900,
+  duration = 700,
   format,
 }: NumberTickerProps) {
   const reduce = useReducedMotion();
@@ -41,7 +39,6 @@ export function NumberTicker({
 
     const tick = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
-      // easeOutExpo
       const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
       const v = from + (value - from) * eased;
       setDisplay(v);

@@ -214,10 +214,10 @@ export function WeatherMap({ location }: Props) {
     if (!markerRef.current) {
       const el = document.createElement("div");
       el.className =
-        "h-4 w-4 rounded-full border-2 border-white bg-aurora-cyan " +
-        "shadow-[0_0_18px_rgba(103,232,249,0.9)] relative";
+        "h-3.5 w-3.5 rounded-full border-2 border-white/80 bg-accent " +
+        "shadow-[0_0_12px_rgba(92,225,230,0.6)] relative";
       el.innerHTML =
-        '<span class="absolute inset-0 rounded-full animate-ping bg-aurora-cyan/60"></span>';
+        '<span class="absolute inset-0 rounded-full bg-accent/30"></span>';
       markerRef.current = new MapLibreMarker({ element: el })
         .setLngLat([location.longitude, location.latitude])
         .addTo(map);
@@ -250,7 +250,7 @@ export function WeatherMap({ location }: Props) {
   };
 
   const activeBtn =
-    "border-aurora-cyan/50 bg-aurora-cyan/15 text-aurora-cyan shadow-[0_0_16px_rgba(103,232,249,0.25)]";
+    "border-accent/30 bg-accent/[0.08] text-accent/80";
 
   return (
     <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl border border-white/[0.08]">
@@ -328,7 +328,7 @@ export function WeatherMap({ location }: Props) {
               setFrameIdx(Number(e.target.value));
             }}
             aria-label="Radar timeline"
-            className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/15 accent-aurora-cyan"
+            className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-white/10 accent-accent"
           />
           <span className="tabular w-12 text-right text-[10px] text-white/60">
             {frameLabel}

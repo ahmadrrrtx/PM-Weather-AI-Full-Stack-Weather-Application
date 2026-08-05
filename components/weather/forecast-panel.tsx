@@ -9,22 +9,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 /* ─────────────────────────────
    ForecastPanel — hourly timeline,
    weekly range chart, detailed days.
-   Charts are lazy chunks (ECharts
-   loads only when this tab opens).
    ───────────────────────────── */
 
 const HourlyChart = dynamic(
   () => import("@/components/charts/hourly-chart").then((m) => m.HourlyChart),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-56 w-full rounded-xl" label="Loading chart" />,
+    loading: () => <Skeleton className="h-52 w-full rounded-xl" label="Loading chart" />,
   },
 );
 const DailyRangeChart = dynamic(
   () => import("@/components/charts/daily-range-chart").then((m) => m.DailyRangeChart),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-40 w-full rounded-xl" label="Loading chart" />,
+    loading: () => <Skeleton className="h-36 w-full rounded-xl" label="Loading chart" />,
   },
 );
 
@@ -37,7 +35,7 @@ export function ForecastPanel({ forecast, units }: Props) {
   return (
     <section aria-label="Forecast" className="space-y-6">
       <div>
-        <SectionLabel>Hourly Timeline</SectionLabel>
+        <SectionLabel>Hourly</SectionLabel>
         <div className="mt-3">
           <HourlyChart hourly={forecast.hourly} units={units} />
         </div>

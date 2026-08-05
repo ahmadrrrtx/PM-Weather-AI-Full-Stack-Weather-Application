@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 
 interface SkeletonProps {
   className?: string;
-  /** aria label for screen readers while loading */
   label?: string;
 }
 
