@@ -1,143 +1,300 @@
-@import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 8, 15, 40;
-  --background-end-rgb: 12, 26, 46;
+/* ─────────────────────────────────────────────────────────────
+   NovaWeather Design Tokens (Tailwind v4 CSS-first theme)
+   Deep-space palette · aurora accents · HUD typography
+   ───────────────────────────────────────────────────────────── */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* Space */
+  --color-void: #03060d;
+  --color-abyss: #060b16;
+  --color-deep: #0a1222;
+  --color-haze: #0e1a30;
+
+  /* Aurora accents */
+  --color-aurora-cyan: #67e8f9;
+  --color-aurora-sky: #38bdf8;
+  --color-aurora-blue: #4f7cff;
+  --color-aurora-violet: #a78bfa;
+  --color-aurora-amber: #fbbf24;
+  --color-aurora-rose: #fb7185;
+  --color-aurora-mint: #6ee7b7;
+
+  /* Glass surfaces */
+  --color-glass: rgba(148, 180, 255, 0.045);
+  --color-glass-strong: rgba(148, 180, 255, 0.08);
+  --color-glass-line: rgba(148, 180, 255, 0.12);
+  --color-glass-line-strong: rgba(148, 180, 255, 0.2);
+
+  --animate-aurora-drift: aurora-drift 26s ease-in-out infinite alternate;
+  --animate-aurora-drift-2: aurora-drift-2 32s ease-in-out infinite alternate;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-float-slow: float-slow 7s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 3.2s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-scan: scan 9s linear infinite;
+
+  @keyframes aurora-drift {
+    0% {
+      transform: translate3d(-6%, -4%, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(5%, 6%, 0) scale(1.12);
+    }
+    100% {
+      transform: translate3d(-3%, 2%, 0) scale(1.05);
+    }
+  }
+  @keyframes aurora-drift-2 {
+    0% {
+      transform: translate3d(4%, 6%, 0) scale(1.08);
+    }
+    50% {
+      transform: translate3d(-5%, -3%, 0) scale(0.96);
+    }
+    100% {
+      transform: translate3d(3%, -6%, 0) scale(1.1);
+    }
+  }
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+/* ───────────────────────── Base ───────────────────────── */
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+html {
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    135deg,
-    rgb(var(--background-start-rgb)) 0%,
-    rgb(var(--background-end-rgb)) 50%,
-    #0d1f3c 100%
-  );
-  min-height: 100vh;
-  font-family: "Inter", system-ui, sans-serif;
+  background-color: var(--color-void);
+  color: rgba(235, 242, 255, 0.92);
+  font-feature-settings: "cv02", "cv03", "cv11";
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+::selection {
+  background: rgba(103, 232, 249, 0.28);
+  color: #fff;
+}
+
+/* Focus ring — visible, keyboard-first */
+:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.85);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background: rgba(148, 180, 255, 0.04);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(99, 179, 237, 0.4);
-  border-radius: 10px;
+  background: rgba(148, 180, 255, 0.18);
+  border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 179, 237, 0.7);
+  background: rgba(148, 180, 255, 0.32);
 }
 
-/* Glassmorphism utility */
-.glass {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
+/* ───────────────────────── Components ───────────────────────── */
 
-.glass-strong {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Shimmer skeleton */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.05) 25%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.05) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s linear infinite;
-}
-
-/* Leaflet map fix */
-.leaflet-container {
-  background: #1a2744 !important;
-  border-radius: 12px;
-}
-
-/* Hide Leaflet attribution slightly */
-.leaflet-control-attribution {
-  background: rgba(0, 0, 0, 0.5) !important;
-  color: rgba(255, 255, 255, 0.5) !important;
-  font-size: 9px !important;
-}
-
-.leaflet-control-attribution a {
-  color: rgba(147, 210, 255, 0.7) !important;
-}
-
-/* Recharts custom */
-.recharts-cartesian-grid-horizontal line,
-.recharts-cartesian-grid-vertical line {
-  stroke: rgba(255, 255, 255, 0.06);
-}
-.recharts-text {
-  fill: rgba(255, 255, 255, 0.6) !important;
-  font-size: 11px;
-}
-.recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: rgba(12, 26, 46, 0.95) !important;
-  border: 1px solid rgba(99, 179, 237, 0.3) !important;
-  border-radius: 8px !important;
-  color: white !important;
-}
-
-/* Animated gradient orb */
-@keyframes orb-rotate {
-  0% {
-    transform: rotate(0deg) scale(1);
+@layer components {
+  /* Floating glass panel */
+  .glass {
+    position: relative;
+    background: linear-gradient(
+      155deg,
+      rgba(148, 180, 255, 0.07) 0%,
+      rgba(148, 180, 255, 0.028) 45%,
+      rgba(148, 180, 255, 0.05) 100%
+    );
+    border: 1px solid rgba(148, 180, 255, 0.12);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+      0 24px 60px -28px rgba(2, 6, 18, 0.9),
+      inset 0 1px 0 rgba(220, 235, 255, 0.09);
   }
-  50% {
-    transform: rotate(180deg) scale(1.05);
+  .glass-strong {
+    background: linear-gradient(
+      155deg,
+      rgba(148, 180, 255, 0.12) 0%,
+      rgba(148, 180, 255, 0.05) 55%,
+      rgba(148, 180, 255, 0.09) 100%
+    );
+    border: 1px solid rgba(148, 180, 255, 0.2);
+    backdrop-filter: blur(26px) saturate(150%);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    box-shadow:
+      0 30px 70px -30px rgba(2, 6, 18, 0.95),
+      inset 0 1px 0 rgba(220, 235, 255, 0.12);
   }
-  100% {
-    transform: rotate(360deg) scale(1);
+
+  /* Top accent hairline for glass panels */
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0 12% auto 12%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(140, 200, 255, 0.35),
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  /* HUD label — small caps technical */
+  .hud-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(148, 180, 255, 0.55);
+    font-weight: 600;
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 24px rgba(103, 232, 249, 0.45);
+  }
+
+  .text-glow-amber {
+    text-shadow: 0 0 24px rgba(251, 191, 36, 0.4);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Aurora gradient text */
+  .aurora-text {
+    background: linear-gradient(
+      100deg,
+      #e8f4ff 0%,
+      #9be8ff 30%,
+      #a78bfa 62%,
+      #e8f4ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(148, 180, 255, 0.05) 25%,
+      rgba(148, 180, 255, 0.11) 50%,
+      rgba(148, 180, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.4s linear infinite;
+  }
+
+  /* Subtle star field via tiny SVG data-uri */
+  .starfield {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='%23bcd4ff'%3E%3Ccircle cx='18' cy='42' r='0.8' opacity='0.8'/%3E%3Ccircle cx='64' cy='12' r='1.1' opacity='0.6'/%3E%3Ccircle cx='121' cy='57' r='0.7' opacity='0.9'/%3E%3Ccircle cx='186' cy='23' r='1.0' opacity='0.5'/%3E%3Ccircle cx='226' cy='118' r='0.9' opacity='0.7'/%3E%3Ccircle cx='14' cy='172' r='1.0' opacity='0.5'/%3E%3Ccircle cx='88' cy='206' r='0.8' opacity='0.8'/%3E%3Ccircle cx='157' cy='188' r='1.2' opacity='0.45'/%3E%3Ccircle cx='212' cy='214' r='0.7' opacity='0.75'/%3E%3Ccircle cx='103' cy='122' r='0.6' opacity='0.85'/%3E%3Ccircle cx='43' cy='98' r='0.9' opacity='0.55'/%3E%3Ccircle cx='238' cy='64' r='0.8' opacity='0.6'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 240px 240px;
+  }
+
+  /* Number readouts */
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-.orb-animate {
-  animation: orb-rotate 12s linear infinite;
+/* ───────────────────────── Reduced motion ───────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-/* Focus visible */
-*:focus-visible {
-  outline: 2px solid rgba(99, 179, 237, 0.7);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* ───────────────────────── Misc ───────────────────────── */
+
+/* ECharts tooltip dark-glass theme */
+.echarts-tooltip {
+  background: rgba(8, 14, 28, 0.92) !important;
+  border: 1px solid rgba(148, 180, 255, 0.25) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px -18px rgba(2, 6, 18, 0.9) !important;
+  padding: 10px 14px !important;
 }
 
-/* Selection */
-::selection {
-  background: rgba(99, 179, 237, 0.3);
-  color: white;
+/* MapLibre dark polish */
+.maplibregl-map {
+  background: #060b16;
+}
+.maplibregl-ctrl-group {
+  background: rgba(8, 14, 28, 0.75) !important;
+  border: 1px solid rgba(148, 180, 255, 0.18) !important;
+  backdrop-filter: blur(12px);
+}
+.maplibregl-ctrl-group button {
+  filter: invert(0.85);
+}
+.maplibregl-ctrl-attrib {
+  background: rgba(6, 11, 22, 0.7) !important;
+  color: rgba(180, 200, 240, 0.55) !important;
+  font-size: 10px !important;
+}
+.maplibregl-ctrl-attrib a {
+  color: rgba(140, 200, 255, 0.75) !important;
 }

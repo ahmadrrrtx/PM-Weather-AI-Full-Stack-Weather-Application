@@ -1,145 +1,150 @@
-// ─── Geocoding ───────────────────────────────────────────────────────────────
+/* ─────────────────────────────────────────────
+   NovaWeather domain types
+   All numeric values are METRIC canon:
+   °C · km/h · mm · hPa · m · % — conversion happens
+   only at the display layer (see lib/units.ts).
+   ───────────────────────────────────────────── */
 
-export interface GeoResult {
+export interface GeoLocation {
+  id?: number;
   name: string;
   latitude: number;
   longitude: number;
-  country: string;
-  country_code: string;
+  country?: string;
+  countryCode?: string;
   admin1?: string;
   admin2?: string;
   timezone?: string;
   population?: number;
+  elevation?: number;
+  /** true when the location came from GPS/browser geolocation */
+  fromGps?: boolean;
 }
-
-// ─── Weather ──────────────────────────────────────────────────────────────────
 
 export interface CurrentWeather {
+  time: string;
   temperature: number;
-  feelsLike: number;
-  humidity: number;
+  apparentTemperature: number;
+  relativeHumidity: number;
+  precipitation: number;
+  rain: number;
+  showers: number;
+  snowfall: number;
+  weatherCode: number;
+  cloudCover: number;
+  pressureMsl: number;
   windSpeed: number;
   windDirection: number;
-  precipitation: number;
-  weatherCode: number;
-  isDay: number;
+  windGusts: number;
+  visibility: number;
+  isDay: boolean;
   uvIndex: number;
-  rain: number;
+  dewPoint: number;
 }
 
-export interface DailyForecast {
-  date: string;
+export interface HourlyPoint {
+  time: string;
+  temperature: number;
+  apparentTemperature: number;
+  precipitationProbability: number;
+  precipitation: number;
+  weatherCode: number;
+  windSpeed: number;
+  windGusts: number;
+  cloudCover: number;
+  uvIndex: number;
+  relativeHumidity: number;
+  isDay: boolean;
+}
+
+export interface DailyPoint {
+  date: string; // YYYY-MM-DD
   weatherCode: number;
   tempMax: number;
   tempMin: number;
+  apparentMax: number;
+  apparentMin: number;
   precipitationSum: number;
-  precipitationProbability: number;
+  precipitationProbabilityMax: number;
   windSpeedMax: number;
+  windGustsMax: number;
   uvIndexMax: number;
   sunrise: string;
   sunset: string;
+  daylightSeconds: number;
+  moonrise: string | null;
+  moonset: string | null;
+  moonPhase: number; // 0 = new moon, 0.5 = full moon
 }
 
-export interface HourlyData {
-  time: string[];
-  temperature: number[];
-  precipitationProbability: number[];
-  windSpeed: number[];
+export interface AirQualityPoint {
+  time: string;
+  usAqi: number;
+  euAqi: number;
+  pm25: number;
+  pm10: number;
+  o3: number;
+  no2: number;
+  so2: number;
+  co: number;
 }
 
-export interface WeatherData {
-  location: GeoResult;
-  current: CurrentWeather;
-  daily: DailyForecast[];
-  hourly: HourlyData;
+export interface WeatherForecast {
+  location: GeoLocation;
   timezone: string;
+  timezoneOffsetSeconds: number;
+  elevation: number;
+  current: CurrentWeather;
+  hourly: HourlyPoint[];
+  daily: DailyPoint[];
   fetchedAt: string;
 }
 
-// ─── Records ──────────────────────────────────────────────────────────────────
-
-export interface WeatherRecord {
-  id: string;
-  locationInput: string;
-  resolvedName: string;
-  latitude: number;
-  longitude: number;
-  startDate: string;
-  endDate: string;
-  weatherJson: WeatherData | null;
-  notes: string;
-  createdAt: string;
-  updatedAt: string;
+export interface ClimatePoint {
+  date: string;
+  tempMax: number;
+  tempMin: number;
+  tempMean: number;
+  precipitation: number;
+  weatherCode: number;
+  windMax: number;
 }
 
-export interface RecordFormData {
-  locationInput: string;
-  startDate: string;
-  endDate: string;
-  notes: string;
+export interface ClimateSummary {
+  points: ClimatePoint[];
+  avgMax: number;
+  avgMin: number;
+  avgMean: number;
+  hottest: ClimatePoint | null;
+  coldest: ClimatePoint | null;
+  wettest: ClimatePoint | null;
+  totalPrecipitation: number;
+  avgWindMax: number;
+  conditionDays: Record<number, number>;
 }
 
-// ─── Tips ─────────────────────────────────────────────────────────────────────
-
-export interface WeatherTip {
-  icon: string;
-  category: string;
-  title: string;
-  description: string;
-  severity: "info" | "warning" | "danger" | "success";
+/** Live conditions for the globe's city markers (multi-location call). */
+export interface GlobalPulsePoint {
+  location: GeoLocation;
+  temperature: number;
+  weatherCode: number;
+  isDay: boolean;
+  windSpeed: number;
 }
 
-// ─── API Responses ────────────────────────────────────────────────────────────
+export type UnitSystem = "metric" | "imperial";
 
-export interface OpenMeteoGeoResponse {
-  results?: Array<{
-    id: number;
-    name: string;
-    latitude: number;
-    longitude: number;
-    country: string;
-    country_code: string;
-    admin1?: string;
-    admin2?: string;
-    timezone?: string;
-    population?: number;
-  }>;
+export interface UnitPrefs {
+  system: UnitSystem;
+  temperature: "celsius" | "fahrenheit";
+  speed: "kmh" | "mph";
+  precipitation: "mm" | "inch";
 }
 
-export interface OpenMeteoForecastResponse {
-  current: {
-    temperature_2m: number;
-    apparent_temperature: number;
-    relative_humidity_2m: number;
-    precipitation: number;
-    rain: number;
-    weather_code: number;
-    wind_speed_10m: number;
-    wind_direction_10m: number;
-    is_day: number;
-    uv_index?: number;
-  };
-  daily: {
-    time: string[];
-    weather_code: number[];
-    temperature_2m_max: number[];
-    temperature_2m_min: number[];
-    precipitation_sum: number[];
-    precipitation_probability_max: number[];
-    wind_speed_10m_max: number[];
-    uv_index_max: number[];
-    sunrise: string[];
-    sunset: string[];
-  };
-  hourly: {
-    time: string[];
-    temperature_2m: number[];
-    precipitation_probability: number[];
-    wind_speed_10m: number[];
-  };
-  timezone: string;
+export type DashboardTab = "overview" | "forecast" | "map" | "analytics";
+
+/** Ambient query errors — single shape for UI. */
+export interface FetchError {
+  status?: number;
+  message: string;
 }
-
-// ─── Export ───────────────────────────────────────────────────────────────────
-
-export type ExportFormat = "json" | "csv" | "markdown";

@@ -1,79 +1,50 @@
 import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
+/** Merge Tailwind classes safely. */
 export function cn(...inputs: ClassValue[]): string {
-  return clsx(inputs);
+  return twMerge(clsx(inputs));
 }
 
-/**
- * Debounce a function
- */
-export function debounce<T extends (...args: unknown[]) => unknown>(
+/** Debounce a function. */
+export function debounce<T extends (...args: never[]) => unknown>(
   fn: T,
-  delay: number
+  delay: number,
 ): (...args: Parameters<T>) => void {
-  let timer: ReturnType<typeof setTimeout>;
+  let timer: ReturnType<typeof setTimeout> | undefined;
   return (...args: Parameters<T>) => {
-    clearTimeout(timer);
+    if (timer) clearTimeout(timer);
     timer = setTimeout(() => fn(...args), delay);
   };
 }
 
-/**
- * Format a number with units
- */
-export function formatUnit(value: number, unit: string, decimals = 0): string {
-  return `${value.toFixed(decimals)}${unit}`;
+/** Clamp a number into [min, max]. */
+export function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
 }
 
-/**
- * Truncate a string
- */
-export function truncate(str: string, max: number): string {
-  if (str.length <= max) return str;
-  return str.slice(0, max - 1) + "…";
+/** Linear interpolation. */
+export function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
 }
 
-/**
- * Get UV index label
- */
-export function uvLabel(
-  uv: number
-): { label: string; color: string } {
-  if (uv <= 2) return { label: "Low", color: "text-green-400" };
-  if (uv <= 5) return { label: "Moderate", color: "text-yellow-400" };
-  if (uv <= 7) return { label: "High", color: "text-orange-400" };
-  if (uv <= 10) return { label: "Very High", color: "text-red-400" };
-  return { label: "Extreme", color: "text-purple-400" };
+/** Format a value as a signed string, e.g. +12.4 or −3.0 */
+export function signed(value: number, decimals = 1): string {
+  const v = value.toFixed(decimals);
+  return value > 0 ? `+${v}` : v;
 }
 
-/**
- * Get humidity label
- */
-export function humidityLabel(humidity: number): string {
-  if (humidity < 30) return "Very Dry";
-  if (humidity < 50) return "Comfortable";
-  if (humidity < 70) return "Moderate";
-  if (humidity < 85) return "Humid";
-  return "Very Humid";
-}
-
-/**
- * Capitalize first letter
- */
+/** Uppercase first letter. */
 export function capitalize(str: string): string {
-  if (!str) return "";
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.length ? str.charAt(0).toUpperCase() + str.slice(1) : str;
 }
 
-/**
- * Format a date range
- */
-export function formatDateRange(start: string, end: string): string {
-  if (!start || !end) return "No date range";
-  const s = new Date(start);
-  const e = new Date(end);
-  const diff = Math.round(
-    (e.getTime() - s.getTime()) / (1000 * 60 * 60 * 24)
-  );
-  return `${start} → ${end} (${diff} day${diff !== 1 ? "s" : ""})`;
+/** Convert degrees to radians. */
+export function degToRad(deg: number): number {
+  return (deg * Math.PI) / 180;
+}
+
+/** Convert radians to degrees. */
+export function radToDeg(rad: number): number {
+  return (rad * 180) / Math.PI;
 }
